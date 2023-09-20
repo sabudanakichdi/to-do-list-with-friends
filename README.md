@@ -24,3 +24,21 @@ To build "We Do List," we'll utilize the following technology stack:
 	- Azure Functions: For serverless functionality, such as email notifications or background tasks.
 	- Azure DevOps: For CI/CD pipelines and project management.
  - 	Codacy: Code Coverage and Quality
+
+## Key features:
+
+-	User Authentication: Users can create accounts or sign in using email, social media accounts, or single sign-on (SSO) options.
+-	Dashboard: A personalized dashboard where users can create, manage, and view their task lists. Users can also join or create groups for collaborative task management.
+-	Task Management:
+	- Create Tasks: Users can add tasks to their personal lists or group lists.
+ 	- Prioritization: Tasks can be assigned priorities and due dates.
+  	- Task Categories: Organize tasks into categories or projects.
+   	- Status Updates: Users can mark tasks as completed or in progress.
+-	Collaboration:
+	- Group Lists: Create lists that are accessible to specific groups of users.
+	- Task Assignment: Assign tasks to specific individuals within the group.
+	- Comments: Users can leave comments on tasks to discuss details or updates.
+-	Notifications: Receive notifications for task assignments and updates using push notification and emails.
+-	Search and Filters: Enable users to search for tasks and apply filters based on various criteria.
+-	Analytics and Reporting: Provide insights into task completion rates, group productivity, and individual contributions.
+-	Notifications: Implement email and push notifications for task updates, reminders, and important announcements.
