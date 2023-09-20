@@ -41,7 +41,6 @@ To build a "We Do List," we'll utilize the following technology stack:
 -	Notifications: Receive notifications for task assignments and updates using push notifications and emails.
 -	Search and Filters: Enable users to search for tasks and apply filters based on various criteria.
 -	Analytics and Reporting: Provide insights into task completion rates, group productivity, and individual contributions.
--	Notifications: Implement email and push notifications for task updates, reminders, and important announcements.
 
 ## Technology Feature:
 
