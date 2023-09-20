@@ -42,3 +42,26 @@ To build a "We Do List," we'll utilize the following technology stack:
 -	Search and Filters: Enable users to search for tasks and apply filters based on various criteria.
 -	Analytics and Reporting: Provide insights into task completion rates, group productivity, and individual contributions.
 -	Notifications: Implement email and push notifications for task updates, reminders, and important announcements.
+
+## Technology Feature:
+
+-	Code Management and Versioning: Github
+	- https://github.com/sabudanakichdi/to-do-list-with-friends
+-	Authentication and Security:
+	- Implement JWT (JSON Web Tokens) for secure authentication.
+	- Ensure data encryption in transit and at rest.
+	- Implement role-based access control (RBAC) using Azure AD for user permissions.
+- 	Testing and Quality Assurance:
+	- Implement rigorous testing practices to ensure reliability and security.
+	- Unit Testing: using Jasmine Unit Test Framework
+  	- Integration Testing: Using CI/CD in Azure Pipeline
+	- Smoke Testing: Testing based on Smoke Scenario
+	- End to End testing: Manual test of all features
+	- Codacy: Code Coverage and Quality
+-	Continuous Integration/Continuous Deployment (CI/CD):
+	- Set up Azure DevOps pipelines for automated testing, deployment, and monitoring.
+
+   	![WeDoApp_CICD](images/WeDoApp_CICD.jpg)
+
+
+
