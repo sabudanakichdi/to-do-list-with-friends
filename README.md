@@ -1,6 +1,6 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/7da768f47707407db8853ba47fe64247)](https://app.codacy.com/gh/sabudanakichdi/to-do-list-with-friends/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
-# We Do List
+# We Do List: SSW-695
 To-Do List App - With Friends
 
 ## Project Overview
