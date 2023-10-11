@@ -1,66 +1,140 @@
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/7da768f47707407db8853ba47fe64247)](https://app.codacy.com/gh/sabudanakichdi/to-do-list-with-friends/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+## Compose sample application
 
-# We Do List
-To-Do List App - With Friends
+### Use with Docker Development Environments
 
-## Project Overview
-"We Do List" is a collaborative task management platform designed to help groups of people coordinate and manage tasks efficiently. Whether it's a project team, a household, a club, or any group with shared responsibilities, this platform will provide a centralized hub for task organization, delegation, tracking, and communication. Users can create and manage tasks, assign them to friends, set deadlines, and monitor progress while fostering effective collaboration.
-
-## Mission Statement:
-> "Our mission is to simplify task management and enhance group collaboration by providing a user-friendly and feature-rich platform. We aim to help friends and communities organize their work, improve productivity, and achieve their goals together."
-
-## Proposed Tech Stack:
-To build a "We Do List," we'll utilize the following technology stack:
--	MERN Stack:
-	- MongoDB: For storing task data and user information.
-	- Express.js: To create the backend API and handle routing.
-	- React.js: To develop the frontend user interface.
-	- Node.js: For server-side scripting and application logic.
--	Project Management:
-	- JIRA: To track User Stories and project velocity throughout 4 sprints.
--	Azure Cloud Services:
-	- Azure App Service: To host the web application and backend server.
-	- Azure Active Directory: For user authentication and authorization.
-	- Azure Functions: For serverless functionality, such as email notifications or background tasks.
-	- Azure DevOps: For CI/CD pipelines and project management.
- - 	Codacy: Code Coverage and Quality
-
-## Key features:
-
--	User Authentication: Users can create accounts or sign in using email, social media accounts, or single sign-on (SSO) options.
--	Dashboard: A personalized dashboard where users can create, manage, and view their task lists. Users can also join or create groups for collaborative task management.
--	Task Management:
-	- Create Tasks: Users can add tasks to their personal lists or group lists.
- 	- Prioritization: Tasks can be assigned priorities and due dates.
-  	- Task Categories: Organize tasks into categories or projects.
-   	- Status Updates: Users can mark tasks as completed or in progress.
--	Collaboration:
-	- Group Lists: Create lists that are accessible to specific groups of users.
-	- Task Assignment: Assign tasks to specific individuals within the group.
-	- Comments: Users can leave comments on tasks to discuss details or updates.
--	Notifications: Receive notifications for task assignments and updates using push notifications and emails.
--	Search and Filters: Enable users to search for tasks and apply filters based on various criteria.
--	Analytics and Reporting: Provide insights into task completion rates, group productivity, and individual contributions.
-
-## Technology Feature:
-
--	Code Management and Versioning: Github
-	- https://github.com/sabudanakichdi/to-do-list-with-friends
--	Authentication and Security:
-	- Implement JWT (JSON Web Tokens) for secure authentication.
-	- Ensure data encryption in transit and at rest.
-	- Implement role-based access control (RBAC) using Azure AD for user permissions.
-- 	Testing and Quality Assurance:
-	- Implement rigorous testing practices to ensure reliability and security.
-	- Unit Testing: using Jasmine Unit Test Framework
-  	- Integration Testing: Using CI/CD in Azure Pipeline
-	- Smoke Testing: Testing based on Smoke Scenario
-	- End to End testing: Manual test of all features
-	- Codacy: Code Coverage and Quality
--	Continuous Integration/Continuous Deployment (CI/CD):
-	- Set up Azure DevOps pipelines for automated testing, deployment, and monitoring.
-
-   	![WeDoApp_CICD](images/WeDoApp_CICD.jpg)
+You can open this sample in the Dev Environments feature of Docker Desktop version 4.12 or later.
 
 
+### React application with a NodeJS backend and a MongoDB database
 
+Project structure:
+```
+.
+├── backend
+│   ├── Dockerfile
+│   ...
+├── compose.yaml
+├── frontend
+│   ├── ...
+│   └── Dockerfile
+└── README.md
+```
+
+[_compose.yaml_](compose.yaml)
+```
+services:
+  frontend:
+    build:
+      context: frontend
+    ...
+    ports:
+      - 3000:3000
+    ...
+  server:
+    container_name: server
+    restart: always
+    build:
+      context: server
+      args:
+        NODE_PORT: 3000
+    ports:
+      - 3000:3000
+    ...
+    depends_on:
+      - mongo
+  mongo:
+    container_name: mongo
+    restart: always
+    ...
+```
+The compose file defines an application with three services `frontend`, `backend` and `db`.
+When deploying the application, docker compose maps port 3000 of the frontend service container to port 3000 of the host as specified in the file.
+Make sure port 3000 on the host is not already being in use.
+
+## Deploy with docker compose
+
+```
+$ docker compose up -d
+Creating network "react-express-mongodb_default" with the default driver
+Building frontend
+Step 1/9 : FROM node:13.13.0-stretch-slim
+ ---> aa6432763c11
+...
+Successfully tagged react-express-mongodb_app:latest
+WARNING: Image for service app was built because it did not already exist. To rebuild this image you must use `docker-compose build` or `docker-compose up --build`.
+Creating frontend        ... done
+Creating mongo           ... done
+Creating app             ... done
+```
+
+## Expected result
+
+Listing containers must show containers running and the port mapping as below:
+```
+$ docker ps
+CONTAINER ID        IMAGE                               COMMAND                  CREATED             STATUS                  PORTS                      NAMES
+06e606d69a0e        react-express-mongodb_server        "docker-entrypoint.s…"   23 minutes ago      Up 23 minutes           0.0.0.0:3000->3000/tcp     server
+ff56585e1db4        react-express-mongodb_frontend      "docker-entrypoint.s…"   23 minutes ago      Up 23 minutes           0.0.0.0:3000->3000/tcp     frontend
+a1f321f06490        mongo:4.2.0                         "docker-entrypoint.s…"   23 minutes ago      Up 23 minutes           0.0.0.0:27017->27017/tcp   mongo
+```
+
+After the application starts, navigate to `http://localhost:3000` in your web browser.
+
+![page](./output.png)
+
+Stop and remove the containers
+```
+$ docker compose down
+Stopping server   ... done
+Stopping frontend ... done
+Stopping mongo    ... done
+Removing server   ... done
+Removing frontend ... done
+Removing mongo    ... done
+```
+
+##### Explanation of `docker-compose`
+
+__Version__
+
+The first line defines the version of a file. It sounds confusing :confused:. What is meant by version of file ?? 
+
+:pill: The Compose file is a YAML file defining services, networks, and volumes for a Docker application. So it is only a version of describing compose.yaml file. There are several versions of the Compose file format – 1, 2, 2.x, and 3.x.
+
+__Services__
+
+Our main goal to create a containers, it starts from here. As you can see there are three services(Docker images): 
+- First is __frontend__ 
+- Second is __server__ which is __backend - Express(NodeJS)__. I used a name server here, it's totally on you to name it __backend__.
+- Third is __mongo__ which is db __MongoDB__.
+
+##### Service app (backend - NodeJS)
+
+We make image of app from our `Dockerfile`, explanation below.
+
+__Explanation of service server__
+
+- Defining a **nodejs** service as __server__.
+- We named our **node server** container service as **server**. Assigning a name to the containers makes it easier to read when there are lot of containers on a machine, it can also avoid randomly generated container names. (Although in this case, __container_name__ is also __server__, this is merely personal preference, the name of the service and container do not have to be the same.) 
+- Docker container starts automatically if its fails.
+- Building the __server__ image using the Dockerfile from the current directory and passing an argument to the
+backend(server) `DockerFile`.
+- Mapping the host port to the container port.
+
+##### Service mongo
+
+We add another service called **mongo** but this time instead of building it from `DockerFile` we write all the instruction here directly. We simply pull down the standard __mongo image__ from the [DockerHub](https://hub.docker.com/) registry as we have done it for Node image.
+
+__Explanation of service mongo__
+
+- Defining a **mongodb** service as __mongo__.
+- Pulling the mongo 4.2.0 image image again from [DockerHub](https://hub.docker.com/).
+- Mount our current db directory to container. 
+- For persistent storage, we mount the host directory ( just like I did it in **Node** image inside `DockerFile` to reflect the changes) `/data` ( you need to create a directory in root of your project in order to save changes to locally as well) to the container directory `/data/db`, which was identified as a potential mount point in the `mongo Dockerfile` we saw earlier.
+- Mounting volumes gives us persistent storage so when starting a new container, Docker Compose will use the volume of any previous containers and copy it to the new container, ensuring that no data is lost.
+- Finally, we link/depends_on the app container to the mongo container so that the mongo service is reachable from the app service.
+- In last mapping the host port to the container port.
+
+:key: `If you wish to check your DB changes on your local machine as well. You should have installed MongoDB locally, otherwise you can't access your mongodb service of container from host machine.` 
+
+:white_check_mark: You should check your __mongo__ version is same as used in image. You can see the version of __mongo__ image in `docker-compose `file, I used __image: mongo:4.2.0__. If your mongo db version on your machine is not same then furst you have to updated your  local __mongo__ version in order to works correctly.
