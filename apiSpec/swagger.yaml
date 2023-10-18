@@ -1,0 +1,950 @@
+openapi: 3.0.3
+info:
+  title: We Do APP
+  description: |-
+    This is the We Do Sever based on the OpenAPI 3.0 specification.
+    Some useful links:
+    - https://github.com/sabudanakichdi/to-do-list-with-friends
+  contact:
+    email: pchauha2@stevens.edu
+    name: Prateek
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 0.0.1
+servers:
+  - url: https://localhost:3000/
+paths:
+  /api/user/login:
+    post:
+      tags:
+        - User
+      summary: Logs user into the system
+      description: ''
+      operationId: loginUser
+      requestBody:
+        description: Update an existent user in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: successful operation
+          headers:
+            X-Rate-Limit:
+              description: calls per hour allowed by the user
+              schema:
+                type: integer
+                format: int32
+            X-Expires-After:
+              description: date in UTC when token expires
+              schema:
+                type: string
+                format: date-time
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          description: Invalid username/password supplied
+  /api/user/register:
+    post:
+      tags:
+        - User
+      summary: Register user into the system
+      description: ''
+      operationId: registerUser
+      requestBody:
+        description: Update an existent user in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '400':
+          description: Invalid username/password supplied
+  /api/user/forgetPassword:
+    post:
+      tags:
+        - User
+      summary: User forgets password
+      description: ''
+      operationId: forgetPassword
+      requestBody:
+        description: User forgets password
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ForgetPassRequest'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '400':
+          description: Invalid username/email supplied
+  /api/user/resetPassword:
+    post:
+      tags:
+        - User
+      summary: User forgets password
+      description: ''
+      operationId: resetPassword
+      requestBody:
+        description: reset password for user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetPasswordRequest'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '400':
+          description: Invalid username/password supplied
+  /api/task:
+    get:
+      tags:
+        - Task
+      summary: Get all task for specific user
+      description: ''
+      operationId: getAllTask
+      parameters:
+        - name: userId
+          in: header
+          description: user id
+          required: true
+          example: johnjane
+          explode: true
+          schema:
+            type: string
+        - name: type
+          in: query
+          description: search type
+          required: true
+          example: johnjane
+          explode: true
+          schema:
+            type: string
+            default: group
+            enum:
+              - personal
+              - group
+        - name: page
+          in: query
+          description: page number for the current paginated query 
+          required: false
+          example: 1
+          explode: true
+          schema:
+            type: string
+        - name: count
+          in: query
+          description: Number of records for the page in query
+          required: false
+          example: 10
+          explode: true
+          schema:
+            type: string
+        - name: key
+          in: query
+          description: key/attribute name for filter
+          required: false
+          example: 10
+          explode: true
+          schema:
+            type: string
+        - name: value
+          in: query
+          description: value for filter
+          required: false
+          example: 10
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskArrayReponse'
+        '400':
+          description: Delete Unsuccessful
+    post:
+      tags:
+        - Task
+      summary: Create Task for specific user and assign to user
+      description: ''
+      operationId: createTask
+      parameters:
+        - name: userId
+          in: header
+          description: Files uploaded by user
+          required: true
+          example: Lion
+          explode: true
+          schema:
+            type: string
+      requestBody:
+        description: Create Task for specific user and assign to user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTaskRequest'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskReponse'
+        '400':
+          description: Task not Created
+  /api/task/{id}:
+    get:
+      tags:
+        - Task
+      summary: Get Task for specific user based on task id
+      description: ''
+      operationId: getTask
+      parameters:
+        - name: userId
+          in: header
+          description: Files uploaded by user
+          required: true
+          example: Lion
+          explode: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: ID of task
+          required: true
+          explode: true
+          example: asdfgh1234567
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskReponse'
+        '400':
+          description: Invalid username/password supplied
+    patch:
+      tags:
+        - Task
+      summary: Edit task for specific user
+      description: ''
+      operationId: editTask
+      parameters:
+        - name: userId
+          in: header
+          description: Files uploaded by user
+          required: true
+          example: Lion
+          explode: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: ID of task
+          required: true
+          explode: true
+          example: asdfgh1234567
+          schema:
+            type: string
+      requestBody:
+        description: Edit Task for specific user and assign to user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditTaskRequest'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskReponse'
+        '400':
+          description: Edit Unsuccessful
+    delete:
+      tags:
+        - Task
+      summary: Delete task for specific user
+      description: ''
+      operationId: deleteTask
+      parameters:
+        - name: userId
+          in: header
+          description: Files uploaded by user
+          required: true
+          example: Lion
+          explode: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: ID of task
+          required: true
+          explode: true
+          example: asdfgh1234567
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '400':
+          description: Delete Unsuccessful
+  /api/group:
+    get:
+      tags:
+        - Group
+      summary: Get all groups for specific user
+      description: ''
+      operationId: getAllGroup
+      parameters:
+        - name: userId
+          in: header
+          description: Files uploaded by user
+          required: true
+          example: Lion
+          explode: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: page number for the current paginated query 
+          required: true
+          example: 1
+          explode: true
+          schema:
+            type: string
+        - name: count
+          in: query
+          description: Number of records for the page in query
+          required: true
+          example: 10
+          explode: true
+          schema:
+            type: string
+        - name: key
+          in: query
+          description: Key/attribute for filter
+          required: false
+          example: 10
+          explode: true
+          schema:
+            type: string
+        - name: value
+          in: query
+          description: value for filter
+          required: false
+          example: 10
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllGroupResponse'
+        '400':
+          description: Delete Unsuccessful
+    post:
+      tags:
+        - Group
+      summary: Create Group for specific user and assign to user
+      description: ''
+      operationId: createGroup
+      parameters:
+        - name: userId
+          in: header
+          description: Files uploaded by user
+          required: true
+          example: Lion
+          explode: true
+          schema:
+            type: string
+      requestBody:
+        description: Create Task for specific user and assign to user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGroupRequest'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateGroupResponse'
+        '400':
+          description: Group not Created
+  /api/group/{id}:
+    get:
+      tags:
+        - Group
+      summary: Get Group for specific user based on task id
+      description: ''
+      operationId: getGroup
+      parameters:
+        - name: userId
+          in: header
+          description: Files uploaded by user
+          required: true
+          example: Lion
+          explode: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: ID of task
+          required: true
+          explode: true
+          example: asdfgh1234567
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetGroupReponse'
+        '400':
+          description: Get Failed
+    patch:
+      tags:
+        - Group
+      summary: Edit Group for specific user
+      description: ''
+      operationId: editGroup
+      parameters:
+        - name: userId
+          in: header
+          description: Files uploaded by user
+          required: true
+          example: Lion
+          explode: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: ID of task
+          required: true
+          explode: true
+          example: asdfgh1234567
+          schema:
+            type: string
+      requestBody:
+        description: Edit Group for specific user and assign to user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGroupRequest'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateGroupResponse'
+        '400':
+          description: Edit Unsuccessful
+    delete:
+      tags:
+        - Group
+      summary: Delete Group for specific user
+      description: ''
+      operationId: deleteGroup
+      parameters:
+        - name: userId
+          in: header
+          description: Files uploaded by user
+          required: true
+          example: Lion
+          explode: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: ID of task
+          required: true
+          explode: true
+          example: asdfgh1234567
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '400':
+          description: Delete Unsuccessful
+
+components:
+  schemas:
+    LoginRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          example: "joemoe"
+        password:
+          type: string
+          example: "asdasdsad"
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          example: "ejibhjkajsndkajnsdaasda"
+        userId:
+          type: string
+          example: "User12345"
+    RegisterRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          example: theUser
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: James
+        email:
+          type: string
+          example: john@email.com
+        password:
+          type: string
+          example: '12345'
+        confirmPassword:
+          type: string
+          example: '12345'
+        contactInfo:
+          type: string
+          example: '12345'
+        image:
+          type: string
+    SuccessResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "Success"
+    ForgetPassRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          example: theUser
+        email:
+          type: string
+          example: 'asd@gmail.com'
+    ResetPasswordRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          example: 'asd@gmail.com'
+        password:
+          type: string
+          example: 'asdfghjkl'
+        confirmPassword:
+          type: string
+          example: 'asdfghjkl'
+    CreateTaskRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          example: 'Pick up Flowers'
+        group:
+          type: string
+          example: 'household'
+        tags:
+          type: string
+          example: 'gift'
+        description:
+          type: string
+          example: 'Pick up flower for mom from flower shop at Baker street'
+        priority:
+          type: string
+          default: LOW
+          enum:
+            - HIGH
+            - LOW
+            - MEDIUM
+        status:
+          type: string
+          default: TODO
+          enum:
+            - TODO
+            - DONE
+            - INPROGRESS
+        assignedTo:
+          type: string
+          example: Jane
+        deadLine:
+          type: string
+          example: '08/26/23'
+        startDate:
+          type: string
+          example: '08/26/23'
+        createdBy:
+          type: string
+          example: John
+        createdOn:
+          type: string
+          example: '08/24/23'
+    TaskReponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: asd1123
+        title:
+          type: string
+          example: 'Pick up Flowers'
+        group:
+          type: string
+          example: 'household'
+        tags:
+          type: string
+          example: 'gift'
+        description:
+          type: string
+          example: 'Pick up flower for mom from flower shop at Baker street'
+        priority:
+          type: string
+          default: LOW
+          enum:
+            - HIGH
+            - LOW
+            - MEDIUM
+        status:
+          type: string
+          default: TODO
+          enum:
+            - TODO
+            - DONE
+            - INPROGRESS
+        assignedTo:
+          type: string
+          example: Jane
+        deadLine:
+          type: string
+          example: '08/26/23'
+        startDate:
+          type: string
+          example: '08/26/23'
+        createdBy:
+          type: string
+          example: John
+        createdOn:
+          type: string
+          example: '08/24/23'
+    TaskArrayReponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/TaskReponse'
+    EditTaskRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          example: 'Pick up Flowers'
+        group:
+          type: string
+          example: 'household'
+        tags:
+          type: string
+          example: 'gift'
+        description:
+          type: string
+          example: 'Pick up flower for mom from flower shop at Baker street'
+        priority:
+          type: string
+          default: LOW
+          enum:
+            - HIGH
+            - LOW
+            - MEDIUM
+        status:
+          type: string
+          default: TODO
+          enum:
+            - TODO
+            - DONE
+            - INPROGRESS
+        assignedTo:
+          type: string
+          example: Jane
+        deadLine:
+          type: string
+          example: '08/26/23'
+        startDate:
+          type: string
+          example: '08/26/23'
+        updatedBy:
+          type: string
+          example: John
+        updatedOn:
+          type: string
+          example: '08/25/23'
+    CreateGroupRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: household
+    CreateGroupResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: asdasdas213
+        name:
+          type: string
+          example: household
+    GetGroupReponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: asdasdas213
+        name:
+          type: string
+          example: household
+        totalTask:
+          type: integer
+          example: 10
+        totalInProgress:
+          type: integer
+          example: 10
+        totalCompleted:
+          type: integer
+          example: 10
+        totalToDo:
+          type: integer
+          example: 10
+        tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskReponse'
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/MemberInfo'
+    MemberInfo:
+      type: object
+      properties:
+        memberName:
+          type: string
+          example: mem123id
+        userCount:
+          type: object
+          $ref: '#/components/schemas/UserCount'
+    GetAllGroupResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/GroupResponse'
+    GroupResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: sads123123
+        name:
+          type: string
+          example: house chores
+        totalTask:
+          type: integer
+          example: 10
+        totalInProgress:
+          type: integer
+          example: 10
+        userCount:
+          type: object
+          $ref: '#/components/schemas/UserCount'
+    UserCount:
+      type: object
+      properties:
+        toDo:
+          type: integer
+          example: 1
+        inProgress:
+          type: integer
+          example: 1
+        completed:
+          type: integer
+          example: 8
+          
+    FileCountResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileCount'
+    FileCount:
+      type: object
+      properties:
+        extensionCount:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExtensionCount'
+        dataType:
+          type: string
+          example: 'Bio'
+        totalCount:
+          type: integer
+          format: int64
+          example: 20
+    ExtensionCount:
+      type: object
+      properties:
+        extension:
+          type: string
+          example: "csv"
+        count:
+          type: integer
+          format: int64
+          example: 20
+    FileSearchResponse:
+      type: object
+      properties:
+        totalFiles:
+          type: integer
+          example: 300
+        searchResult:
+          type: array
+          items: 
+            $ref: '#/components/schemas/File'
+    File:
+      type: object
+      properties:
+        fileName:
+          type: string
+        description:
+          type: string
+        searchableAlias:
+          type: string
+        uploadedBy:
+          type: string
+        createdOn:
+          type: string
+        updatedOn:
+          type: string
+        dataType:
+          type: string
+        extension:
+          type: string
+        status:
+          type: string
+          example: Uploading
+          format: string
+          enum:
+            - Uploading
+            - Uploaded
+            - Failed
+        errorDesc:
+          type: string
+        meta:
+          type: array
+          items:
+            $ref: '#/components/schemas/Meta'
+    Meta:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    UpdateFileMetaRequest:
+      type: object
+      properties:
+        description:
+          type: string
+        searchableAlias:
+          type: string
+        meta:
+          type: array
+          items:
+            $ref: '#/components/schemas/Meta'
+    Response:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          enum:
+            - 400
+            - 401
+            - 403
+            - 422
+            - 200
+            - 500
+            - 201
+            - 202
+        success:
+          type: boolean
+        message:
+          type: string
+          enum:
+            - "Authentication failed. Please login with valid credentials."
+            - "Successfully logged in"
+            - "Something unexpected happened"
+            - "Your session has expired. Please login again"
+            - "Some of the files were deleted"
+            - "No files were deleted"
+            - "Successfully deleted"
+            - "Updated successfully"
+            - "Successfully completed"
+            - "Requested API not found"
+            - "Already exists"
+            - "You are not authorized to complete this action"
+            - "Bad request. Please try again with valid parameters"
+            - "Required parameter missing"
+      xml:
+        name: '##default'
+  securitySchemes:
+    auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: <some_auth_url>
+          scopes:
+            read:pets: search files and download files
+            write:files: upload files
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
