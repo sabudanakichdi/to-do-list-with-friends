@@ -114,6 +114,94 @@ paths:
                 $ref: '#/components/schemas/SuccessResponse'
         '400':
           description: Invalid username/password supplied
+  /api/member/inviteMember:
+    post:
+      tags:
+        - Members
+      summary: Invite Member to group based on email id or username
+      description: ''
+      operationId: inviteMember
+      requestBody:
+        description: Invite Members based on user name or email id
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InviteMemberRequest'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '400':
+          description: Invalid username/password supplied
+  /api/member:
+    get:
+      tags:
+        - Members
+      summary: Get all Members for invite or assign task
+      description: ''
+      operationId: getMember
+      parameters:
+        - name: userId
+          in: header
+          description: user id
+          required: true
+          example: johnjane
+          explode: true
+          schema:
+            type: string
+        - name: group
+          in: query
+          description: group id
+          required: false
+          example: household
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemberListResponse'
+        '400':
+          description: GET Unsuccessful
+  /api/member/{id}:
+    delete:
+      tags:
+        - Members
+      summary: Remove Members from Group
+      description: ''
+      operationId: removeMember
+      parameters:
+        - name: userId
+          in: header
+          description: User Id
+          required: true
+          example: Lion
+          explode: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: ID of member
+          required: true
+          explode: true
+          example: asdfgh1234567
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '400':
+          description: Delete Unsuccessful
   /api/task:
     get:
       tags:
@@ -182,7 +270,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/TaskArrayReponse'
         '400':
-          description: Delete Unsuccessful
+          description: GET Unsuccessful
     post:
       tags:
         - Task
@@ -192,7 +280,7 @@ paths:
       parameters:
         - name: userId
           in: header
-          description: Files uploaded by user
+          description: User Id
           required: true
           example: Lion
           explode: true
@@ -223,7 +311,7 @@ paths:
       parameters:
         - name: userId
           in: header
-          description: Files uploaded by user
+          description: User Id
           required: true
           example: Lion
           explode: true
@@ -255,7 +343,7 @@ paths:
       parameters:
         - name: userId
           in: header
-          description: Files uploaded by user
+          description: User Id
           required: true
           example: Lion
           explode: true
@@ -293,7 +381,7 @@ paths:
       parameters:
         - name: userId
           in: header
-          description: Files uploaded by user
+          description: User Id
           required: true
           example: Lion
           explode: true
@@ -326,7 +414,7 @@ paths:
       parameters:
         - name: userId
           in: header
-          description: Files uploaded by user
+          description: User Id
           required: true
           example: Lion
           explode: true
@@ -382,7 +470,7 @@ paths:
       parameters:
         - name: userId
           in: header
-          description: Files uploaded by user
+          description: User Id
           required: true
           example: Lion
           explode: true
@@ -413,7 +501,7 @@ paths:
       parameters:
         - name: userId
           in: header
-          description: Files uploaded by user
+          description: User Id
           required: true
           example: Lion
           explode: true
@@ -445,7 +533,7 @@ paths:
       parameters:
         - name: userId
           in: header
-          description: Files uploaded by user
+          description: User Id
           required: true
           example: Lion
           explode: true
@@ -483,7 +571,7 @@ paths:
       parameters:
         - name: userId
           in: header
-          description: Files uploaded by user
+          description: User Id
           required: true
           example: Lion
           explode: true
@@ -506,9 +594,109 @@ paths:
                 $ref: '#/components/schemas/SuccessResponse'
         '400':
           description: Delete Unsuccessful
-
+  /api/notification:
+    get:
+      tags:
+        - Notifications
+      summary: Get all Notification of the user
+      description: ''
+      operationId: getNotification
+      parameters:
+        - name: userId
+          in: header
+          description: user id
+          required: true
+          example: johnjane
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetNotificationListResponse'
+        '400':
+          description: Get Unsuccessful
+    post:
+      tags:
+        - Notifications
+      summary: Post read/unread status of Notifications by the user
+      description: ''
+      operationId: postReadNotification
+      parameters:
+        - name: userId
+          in: header
+          description: User Id
+          required: true
+          example: Lion
+          explode: true
+          schema:
+            type: string
+      requestBody:
+        description: Create Task for specific user and assign to user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotificationRequest'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '400':
+          description: Notification not marked as read
 components:
   schemas:
+    GetNotificationListResponse:
+      type: object
+      properties:
+        notifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/Notification'
+    Notification:
+      type: object
+      properties:
+        notificationId:
+          type: string
+          example: not123
+        group:
+          type: string
+          example: "household"
+        message:
+          type: string
+          example: "Task Added"
+        timeDifference:
+          type: string
+          example: '5 Min Ago'
+        read:
+          type: boolean
+          example: true
+    NotificationRequest:
+      type: object
+      properties:
+        notificationId:
+          type: string
+          example: not123
+        read:
+          type: boolean
+          example: true
+    InviteMemberRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          example: "joemoe"
+        email:
+          type: string
+          example: "asd@gmail.com"
+        group:
+          type: string
+          example: household
     LoginRequest:
       type: object
       properties:
@@ -762,8 +950,8 @@ components:
         members:
           type: array
           items:
-            $ref: '#/components/schemas/MemberInfo'
-    MemberInfo:
+            $ref: '#/components/schemas/MemberTaskDetails'
+    MemberTaskDetails:
       type: object
       properties:
         memberName:
@@ -772,6 +960,22 @@ components:
         userCount:
           type: object
           $ref: '#/components/schemas/UserCount'
+    MemberInfo:
+      type: object
+      properties:
+        memberName:
+          type: string
+          example: mem123id
+        email:
+          type: string
+          example: asd@gmail.com
+    MemberListResponse:
+      type: object
+      properties:
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/MemberInfo'
     GetAllGroupResponse:
       type: array
       items:
