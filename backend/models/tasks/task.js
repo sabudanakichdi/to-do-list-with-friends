@@ -7,7 +7,7 @@ const Task = mongoose.model("Task", {
     required: true,
   },
   group: {
-    type: String,
+    type: String,// Can be Group object
     trim: true,
   },
   tags: {
@@ -27,7 +27,7 @@ const Task = mongoose.model("Task", {
     trim: true,
   },
   assignedTo: {
-    type: String,
+    type: String,//Needs to be User object
     trim: true,
   },
   deadLine: {
@@ -38,7 +38,7 @@ const Task = mongoose.model("Task", {
     type: Date,
     trim: true,
   },
-  createdBy: {
+  createdBy: { //Can be User object
     type: String,
     trim: true,
   },
