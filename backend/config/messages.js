@@ -54,6 +54,11 @@ module.exports = {
     message: "Bad request. Please try again with valid parameters",
     success: false,
   },
+  TITLE_REQUIRED:{
+    code: 499,
+    message: "Title is required",
+    success: false,
+  },
   IN_COMPLETE_REQUEST: {
     code: 422,
     message: "Required parameter missing",
