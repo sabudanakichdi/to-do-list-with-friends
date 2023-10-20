@@ -1,13 +1,4 @@
 const TaskResponse = {
-    sendSuccessWithoutData:(res,message)=>{
-
-        const responseMessage = {
-            code: message.code,
-            success: true,
-            message: message.message,
-        };
-        return res.status(message.code).json(responseMessage);
-    },
     sendSuccess: (res, message, data = null) => {
         const responseMessage = {
             id: message.id,

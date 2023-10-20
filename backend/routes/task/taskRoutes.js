@@ -1,6 +1,6 @@
 const express = require("express");
 const taskResponses = require("../../utils/helpers/responses");
-const messages = require("../../config/messages");
+const messages = require("../../utils/helpers/messages");
 const { Task } = require("../../models/tasks/task");
 
 const taskRouter = express.Router();
@@ -50,7 +50,7 @@ taskRouter.post("/task", (req, res) => {
 //Get Task By Id
 taskRouter.get("/task/:id",async (req, res) => {
     
-    const task = await Task.findById(req.params.id, { __v: 0}).then((result) => {
+     await Task.findById(req.params.id, { __v: 0}).then((result) => {
         taskResponses.sendSuccess(res, messages.SUCCESSFUL, result);
       }).catch((e) => { 
         taskResponses.sendError(res, messages.TASK_NOT_FOUND, e);
@@ -61,13 +61,14 @@ taskRouter.get("/task/:id",async (req, res) => {
 //Update Task
 taskRouter.patch("/task/:id", async (req,res)=>{
     const updates = Object.keys(req.body);
+    //need to remove few fields from updates
     const allowedUpdates = ["title", "group", "tags", "description", "priority", "status", "assignedTo", "deadLine", "startDate", "createdBy", "createdOn"];
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update));
     if (!isValidOperation) {
       taskResponses.sendError(res, messages.FORBIDDEN);
       return;
     }
-    const task = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true }).then((result) => {
+    await Task.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true }).then((result) => {
         taskResponses.sendSuccess(res, messages.SUCCESSFUL_UPDATE, result);
       }).catch((e) => { 
         taskResponses.sendError(res, messages.TASK_NOT_FOUND, e);
@@ -78,8 +79,8 @@ taskRouter.patch("/task/:id", async (req,res)=>{
 //Delete Task
 taskRouter.delete("/task/:id", async (req,res)=>{ 
 
-    const task = await Task.findByIdAndDelete(req.params.id).then((result) => {
-        taskResponses.sendSuccessWithoutData(res, messages.SUCCESSFUL_DELETE);
+    await Task.findByIdAndDelete(req.params.id).then((result) => {
+        taskResponses.sendSuccess(res, messages.SUCCESSFUL_DELETE);
       }).catch((e) => { 
         taskResponses.sendError(res, messages.TASK_NOT_FOUND, e);
       });
