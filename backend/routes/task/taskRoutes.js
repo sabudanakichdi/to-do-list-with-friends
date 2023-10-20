@@ -1,9 +1,12 @@
 const express = require("express");
+const {validateTask} =require("../../middleware/validator/taskValidator")
+const {validationResult} = require("express-validator")
 const taskResponses = require("../../utils/helpers/responses");
 const messages = require("../../utils/helpers/messages");
 const { Task } = require("../../models/tasks/task");
 
 const taskRouter = express.Router();
+
 
 //Get 
 taskRouter.get("/task", (req, res) => {
@@ -17,25 +20,15 @@ taskRouter.get("/task", (req, res) => {
     });
 
 //Add Task
-taskRouter.post("/task", (req, res) => {
-      const newTask = new Task({
-        title: req.body.title,
-        group: req.body.group,
-        tags: req.body.tags,
-        description: req.body.description,
-        priority: req.body.priority,
-        status: req.body.status,
-        assignedTo: req.body.assignedTo,
-        deadLine: req.body.deadLine,
-        startDate: req.body.startDate,
-        createdBy: req.body.createdBy,
-        createdOn: req.body.createdOn,
-      });
-      //Title Field is required
-      if (!newTask.title) {
-        taskResponses.sendError(res, messages.TITLE_REQUIRED);
-        return;
-      }
+taskRouter.post("/task", validateTask,(req, res) => {
+
+  
+      const newTask = new Task(req.body);
+
+      const errors = validationResult(req).array().map(error => error.msg);
+      if(errors.length>0){
+          res.status(499).json(errors);
+      };
 
       newTask
         .save()
