@@ -34,10 +34,10 @@ module.exports = {
     success: true,
     message: "Successfully completed",
   },
-  NOT_FOUND: {
+  TASK_NOT_FOUND: {
     code: 404,
     success: true,
-    message: "Requested API not found",
+    message: "Requested Task not found",
   },
   ALREADY_EXIST: {
     code: 200,
@@ -59,4 +59,5 @@ module.exports = {
     message: "Required parameter missing",
     success: false,
   },
+  
 };
