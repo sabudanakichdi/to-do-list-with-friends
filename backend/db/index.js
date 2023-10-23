@@ -1,7 +1,5 @@
-/**
- * Created by Syed Afzal
- */
-const mongoose = require("mongoose");
+
+var mongoose = require("mongoose");
 
 exports.connect = (app) => {
   const options = {

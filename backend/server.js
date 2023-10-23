@@ -1,6 +1,4 @@
-/**
- * Created by Syed Afzal
- */
+
 require("./config/config");
 
 const express = require("express");

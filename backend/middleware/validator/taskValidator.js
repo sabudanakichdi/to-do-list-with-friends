@@ -1,4 +1,4 @@
-const {body} = require("express-validator")
+var {body} = require("express-validator")
 
 const validateTask = [
     body('title').notEmpty().withMessage("Title is requried"), 
