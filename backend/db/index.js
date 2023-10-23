@@ -12,7 +12,7 @@ exports.connect = (app) => {
     mongoose.Promise = global.Promise;
     console.log("MongoDB connection with retry");
     mongoose
-      .connect("mongodb://localhost:27017/WeDo", options)
+      .connect(process.env.MONGODB_URI, options)
       .then(() => {
         console.log("MongoDB is connected");
         app.emit("ready");
