@@ -1,7 +1,5 @@
-/**
- * Created by Syed Afzal
- */
-const mongoose = require("mongoose");
+
+var mongoose = require("mongoose");
 
 exports.connect = (app) => {
   const options = {
@@ -14,7 +12,7 @@ exports.connect = (app) => {
     mongoose.Promise = global.Promise;
     console.log("MongoDB connection with retry");
     mongoose
-      .connect(process.env.MONGODB_URI, options)
+      .connect("mongodb://localhost:27017/WeDo", options)
       .then(() => {
         console.log("MongoDB is connected");
         app.emit("ready");
