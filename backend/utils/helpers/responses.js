@@ -1,9 +1,18 @@
-const serverResponse = {
+const TaskResponse = {
     sendSuccess: (res, message, data = null) => {
         const responseMessage = {
-            code: message.code ? message.code : 500,
-            success: message.success,
-            message: message.message,
+            id: message.id,
+            title: message.title,
+            group: message.group,
+            tags: message.tags,
+            description: message.description,
+            priority: message.priority,
+            status: message.status,
+            assignedTo: message.assignedTo,
+            deadLine: message.deadLine,
+            startDate: message.startDate,
+            createdBy: message.createdBy,
+            createdOn: message.createdOn,
         };
         if (data) { responseMessage.data = data; }
         return res.status(message.code).json(responseMessage);
@@ -18,4 +27,4 @@ const serverResponse = {
     },
 };
 
-module.exports = serverResponse;
+module.exports = TaskResponse;
