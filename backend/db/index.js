@@ -1,5 +1,5 @@
 
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 exports.connect = (app) => {
   const options = {
