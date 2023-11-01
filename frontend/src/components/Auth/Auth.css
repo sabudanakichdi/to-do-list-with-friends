@@ -1,0 +1,51 @@
+.container {
+    width: 80%;
+    left: 10%;    
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .header {
+    text-align: center;
+  }
+  
+  .header img {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .header h1 {
+    font-size: 24px;
+    margin-top: 0;
+  }
+  
+  .content {
+    padding: 20px;
+  }
+  
+    .form {
+    margin-bottom: 20px;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .button {
+    border-radius: 100px;
+    background: #000;
+    width: 100%;
+    padding: 10px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .footer {
+    text-align: center;
+    font-size: 12px;
+  }
