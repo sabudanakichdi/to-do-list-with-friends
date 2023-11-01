@@ -7,6 +7,7 @@ import Register from './pages/auth/Register';
 import Forgotpwd from './pages/auth/Forgotpwd';
 import Resetpwd from "./pages/auth/Resetpwd";
 import { createTheme, ThemeProvider } from "@mui/material";
+import TaskForm from "./components/TaskForm/TaskForm";
 
 const theme = createTheme({
   palette: {
@@ -32,7 +33,8 @@ export default class App extends React.Component {
         <Route path="/login" Component={Login} />
         <Route path="/register" Component={Register} />
         <Route path="/forgot" Component={Forgotpwd} />
-        <Route path="/reset" Component={Resetpwd} />        
+        <Route path="/reset" Component={Resetpwd} />   
+        <Route path='/task' element={<TaskForm />} />     
       </Routes >
     </Router>
      </ThemeProvider>
