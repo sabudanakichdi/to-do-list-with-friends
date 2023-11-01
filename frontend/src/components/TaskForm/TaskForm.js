@@ -25,7 +25,17 @@ function TaskForm() {
 
 
   const handleCreateTask = async (event) => {
-    
+  
+    let missingFields = [];
+    if (!formData.title) missingFields.push('Title');
+    if (!formData.description) missingFields.push('Description');
+    if (!formData.status) missingFields.push('Status');
+    if (!formData.priority) missingFields.push('Priority');
+  
+    if (missingFields.length > 0) {
+      alert(`Please fill out the following fields: ${missingFields.join(', ')}`);
+      return;
+    }
     try {
       event.preventDefault();
       const endpoint = 'http://localhost:8000/api/task';
@@ -52,7 +62,7 @@ function TaskForm() {
       </div>
 
       <label htmlFor="title">Title</label>
-      <input type="text" id="title" name="title" value={formData.title} onChange={handleInputChange} placeholder="Title of the task" />
+      <input type="text" id="title" name="title" value={formData.title} onChange={handleInputChange} placeholder="Title of the task" required />
 
       <div className="group-container">
     <label htmlFor="group">Group</label>
@@ -70,12 +80,12 @@ function TaskForm() {
       <input type="text" id="tags" name="tags" value={formData.tags} onChange={handleInputChange} placeholder="Add tags" />
 
       <label htmlFor="description">Description</label>
-      <textarea id="description" name="description" value={formData.description} onChange={handleInputChange} placeholder="Description of the task"></textarea>
+      <textarea id="description" name="description" value={formData.description} onChange={handleInputChange} placeholder="Description of the task" required></textarea>
 
       <div className="priority-status-container">
     <div>
         <label htmlFor="priority">Priority</label>
-        <select id="priority" name="priority" value={formData.priority} onChange={handleInputChange}>
+        <select id="priority" name="priority" value={formData.priority} onChange={handleInputChange} required>
             <option value="" disabled>Please Select</option>
             <option value="low">Low</option>
             <option value="medium">Medium</option>
@@ -85,7 +95,7 @@ function TaskForm() {
 
     <div>
         <label htmlFor="status">Status</label>
-        <select id="status" name="status" value={formData.status} onChange={handleInputChange}>
+        <select id="status" name="status" value={formData.status} onChange={handleInputChange} required>
             <option value="" disabled>Please Select</option>
             <option value="to-do">To-Do</option>
             <option value="in-progress">In-Progress</option>
