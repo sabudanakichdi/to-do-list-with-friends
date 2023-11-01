@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './TaskForm.css';
+import axios from 'axios';
 
 function TaskForm() {
   const [formData, setFormData] = useState({
@@ -22,17 +23,28 @@ function TaskForm() {
     }));
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    // Here, you can make your API call using formData
-    console.log(formData);
-    // Do API operations here
+
+  const handleCreateTask = async (event) => {
+    
+    try {
+      event.preventDefault();
+      const endpoint = 'http://localhost:8000/api/task';
+      const response = await axios.post(endpoint, formData);
+      if(response.status === 200){
+         alert('Task created successfully');
+      }else{ alert('Task not created')}
+      console.log('Task created successfully:', response.data);
+        
+    } catch (error) {
+      console.error('Error creating task:', error);
+      alert('An error occurred while creating the task. Please try again.');
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="task-form">
+    <form className="task-form">
       <div className="header">
-        Add Task
+        Task Management
         <span className="header-icons">
           <span>←</span>
           <span>×</span>
@@ -98,7 +110,7 @@ function TaskForm() {
       </div>
 
       <div className="actions">
-        <button type="submit" className="create-btn">Create</button>
+        <button type="button" className="create-btn" onClick={handleCreateTask}>Create</button>
         <button type="button" className="cancel-btn">Cancel</button>
       </div>
     </form>
