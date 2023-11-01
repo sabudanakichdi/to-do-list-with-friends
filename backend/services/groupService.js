@@ -20,18 +20,18 @@ const groupService = {
     },
 
     async updateGroup(id, groupName) {
-        const updatedTask = await Group.findByIdAndUpdate(id, {"name": groupName}, {
+        const updatedGroup = await Group.findByIdAndUpdate(id, {"name": groupName}, {
           new: true,
           runValidators: true,
         });
-        if (!updatedTask) {
+        if (!updatedGroup) {
           return false;
         }else{
-            return updatedTask;
+            return updatedGroup;
         }
       },
     
-      async deleteTask(id) {
+      async deleteGroup(id) {
         try{
             await Group.findByIdAndDelete(id);
             return true;
