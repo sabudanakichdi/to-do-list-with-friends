@@ -1,0 +1,66 @@
+const { Task } = require("../models/tasks/task");
+const taskResponses = require("../utils/helpers/responses");
+const messages = require("../utils/helpers/messages");
+const { validationResult } = require("express-validator");
+const { response } = require("express");
+const allowedUpdates = [
+  "title",
+  "group",
+  "tags",
+  "description",
+  "priority",
+  "status",
+  "assignedTo",
+  "deadLine",
+  "startDate",
+  "createdBy",
+];
+const taskService = {
+  async getTasks() {
+    return Task.find({}, { __v: 0 });
+  },
+
+  async creatTask(task) {
+    const newTask = new Task(task);
+    newTask.save();
+    return newTask;
+
+  },
+
+  async getTaskById(id) {
+    const task = await Task.findById(id);
+    if (task) {
+      return task;
+    }
+  },
+
+  async updateTask(id, taskUpdates) {
+    const updates = Object.keys(taskUpdates);
+    const isValidOperation = updates.every((update) =>
+      allowedUpdates.includes(update)
+    );
+    if (!isValidOperation) {
+        return "Not allowed";
+    }
+    const updatedTask = await Task.findByIdAndUpdate(id, taskUpdates, {
+      new: true,
+      runValidators: true,
+    });
+    if (!updatedTask) {
+      return false;
+    }else{
+        return updatedTask;
+    }
+  },
+
+  async deleteTask(id) {
+    const task = await Task.findByIdAndDelete(id);
+    if (!task) {
+      return false;
+    }else{
+        return true;
+    } 
+  },
+};
+
+module.exports = taskService;
