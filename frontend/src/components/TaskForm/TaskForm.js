@@ -28,18 +28,16 @@ function TaskForm() {
     
     try {
       event.preventDefault();
-      // Define the API endpoint URL
       const endpoint = 'http://localhost:8000/api/task';
-
-      // Make the API call
       const response = await axios.post(endpoint, formData);
-
-      // Handle the response as needed, e.g., show a success message, redirect, etc.
+      if(response.status === 200){
+         alert('Task created successfully');
+      }else{ alert('Task not created')}
       console.log('Task created successfully:', response.data);
-
+        
     } catch (error) {
-      // Handle any errors that occurred during the API call
       console.error('Error creating task:', error);
+      alert('An error occurred while creating the task. Please try again.');
     }
   };
 
