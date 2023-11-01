@@ -1,94 +1,71 @@
 const express = require("express");
-const {validateTask} =require("../../middleware/validator/taskValidator")
-const {validationResult} = require("express-validator")
+const { validateTask } = require("../../middleware/validator/taskValidator");
+const taskService = require("../../services/taskService");
 const taskResponses = require("../../utils/helpers/responses");
 const messages = require("../../utils/helpers/messages");
-const { Task } = require("../../models/tasks/task");
+const { validationResult } = require("express-validator");
 
 const taskRouter = express.Router();
 
-const allowedUpdates = ["title", "group", "tags", "description", "priority", "status", "assignedTo", "deadLine", "startDate", "createdBy", "createdOn"];
-   
-//Get 
+//Get
 taskRouter.get("/task", (req, res) => {
-      Task.find({}, { __v: 0 })
-        .then((tasks) => {
-          taskResponses.sendSuccess(res, messages.SUCCESSFUL, tasks);
-        })
-        .catch((e) => {
-          taskResponses.sendError(res, messages.NOT_FOUND, e);
-        });
+  taskService
+    .getTasks(req, res)
+    .then((result) => {
+      taskResponses.sendSuccess(res, messages.SUCCESSFUL, result);
+    })
+    .catch((e) => {
+      taskResponses.sendError(res, messages.BAD_REQUEST, e);
     });
+});
 
 //Add Task
-taskRouter.post("/task", validateTask,(req, res) => {
+taskRouter.post("/task", validateTask, (req, res) => {
+  const errors = validationResult(req)
+    .array()
+    .map((error) => error.msg);
+  if (errors.length > 0) {
+    return res.status(499).json(errors);
+  }
 
-  
-      const newTask = new Task(req.body);
-
-      const errors = validationResult(req).array().map(error => error.msg);
-      if(errors.length>0){
-          return res.status(499).json(errors);
-      };
-
-      newTask
-        .save()
-        .then((result) => {
-          taskResponses.sendSuccess(res, messages.SUCCESSFUL, result);
-        })
-        .catch((e) => {
-          taskResponses.sendError(res, messages.BAD_REQUEST, e);
-        });
+  const result = taskService.creatTask(req.body);
+  if (result) {
+    taskResponses.sendSuccess(res, messages.SUCCESSFUL, result);
+  } else {
+    taskResponses.sendError(res, messages.BAD_REQUEST, e);
+  }
 });
+
 //TODO: Add userId Header
 //Get Task By Id
-taskRouter.get("/task/:id",async (req, res) => {
-    const task = await Task.findById(req.params.id);
-    if (!task) {
-      taskResponses.sendError(res, messages.TASK_NOT_FOUND);
-      return;
-    }
-    taskResponses.sendSuccess(res, messages.SUCCESSFUL, task);
+taskRouter.get("/task/:id", async (req, res) => {
+  try {
+    const result = await taskService.getTaskById(req.params.id);
 
+   if(result){ taskResponses.sendSuccess(res, messages.SUCCESSFUL, result)};
+   return taskResponses.sendError(res, messages.TASK_NOT_FOUND, e);
+  } catch (error) {
+    taskResponses.sendError(res, messages.BAD_REQUEST, error);
+  }
 });
 
 //Update Task
 taskRouter.patch("/task/:id", async (req, res) => {
-  try {
-    const updates = Object.keys(req.body);
-    const isValidOperation = updates.every((update) =>
-      allowedUpdates.includes(update)
-    );
-    if (!isValidOperation) {
-      taskResponses.sendError(res, messages.FORBIDDEN);
-      return;
-    }
-    const updatedTask = await Task.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-
-    if (!updatedTask) {
-      taskResponses.sendError(res, messages.TASK_NOT_FOUND);
-      return;
-    }
-
-    taskResponses.sendSuccess(res, messages.SUCCESSFUL_UPDATE, updatedTask);
-  } catch (error) {
-    console.error(error); 
-    taskResponses.sendError(res, messages.INTERNAL_SERVER_ERROR); 
-  }
+  await taskService.updateTask(req.params.id, req.body).then((result) => {
+    taskResponses.sendSuccess(res, messages.SUCCESSFUL, result);
+  }).catch((e) => { 
+    taskResponses.sendError(res, messages.BAD_REQUEST, e);
+  });
 });
 
 //Delete Task
-taskRouter.delete("/task/:id", async (req,res)=>{ 
+taskRouter.delete("/task/:id", async (req, res) => {
+    const result = await taskService.deleteTask(req.params.id);
+    if(result){
+        taskResponses.sendSuccess(res, messages.SUCCESSFUL, "Task deleted");}
+       else{
+        taskResponses.sendError(res, messages.TASK_NOT_FOUND, "Task not found");
+       } 
+});
 
-  const task =  await Task.findByIdAndDelete(req.params.id);
-  if(!task){
-    taskResponses.sendError(res, messages.TASK_NOT_FOUND);
-    return;
-  }
-  taskResponses.sendSuccess(res, messages.SUCCESSFUL_DELETE);
-});  
-
-module.exports = taskRouter;    
+module.exports = taskRouter;
