@@ -54,12 +54,10 @@ const taskService = {
   },
 
   async deleteTask(id) {
-    const task = await Task.findByIdAndDelete(id);
-    if (!task) {
-      return false;
-    }else{
+    try{
+        await Task.findByIdAndDelete(id);
         return true;
-    } 
+    }catch(e){return false}
   },
 };
 

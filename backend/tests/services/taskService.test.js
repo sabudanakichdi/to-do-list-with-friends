@@ -63,18 +63,30 @@ describe("creatTask", () => {
       });
       
   
-    describe("deleteTask", () => {
-      it("should delete a task if it exists", async () => {
-        Task.findByIdAndDelete.mockResolvedValueOnce({ id: "1", title: "Task 1" });
-        const isDeleted = await taskService.deleteTask("1");
-        expect(isDeleted).toBeTruthy();
+      describe("deleteTask", () => {
+        beforeEach(() => {
+          jest.clearAllMocks();
+        });
+    
+        it("should return true if the task is successfully deleted", async () => {
+          // Arrange
+          const taskId = "validTaskId";
+          Task.findByIdAndDelete.mockResolvedValueOnce({}); // Mock to resolve with an empty object
+          
+          const result = await taskService.deleteTask(taskId);
+          expect(result).toBeTruthy();
+          expect(Task.findByIdAndDelete).toHaveBeenCalledWith(taskId);
+        });
+    
+        it("should return false if an error occurs while deleting the task", async () => {
+          
+          const taskId = "invalidTaskId";
+          Task.findByIdAndDelete.mockRejectedValueOnce(new Error("Failed to delete task")); // Mock to reject with an error
+    
+          const result = await taskService.deleteTask(taskId);
+          expect(result).toBeFalsy();
+          expect(Task.findByIdAndDelete).toHaveBeenCalledWith(taskId);
+        });
       });
-  
-      it("should return false if task does not exist", async () => {
-        Task.findByIdAndDelete.mockResolvedValueOnce(null);
-        const isDeleted = await taskService.deleteTask("1");
-        expect(isDeleted).toBeFalsy();
-      });
-    });
   });
   
