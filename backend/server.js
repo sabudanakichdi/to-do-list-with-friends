@@ -6,6 +6,7 @@ require("./config/config");
 const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
+const router = require("./routes");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const db = require("./db");
@@ -22,7 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 //  adding routes
-require("./routes")(app);
+app.use('/api',router);
 
 app.on("ready", () => {
   app.listen(3000, () => {

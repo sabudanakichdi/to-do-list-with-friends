@@ -8,7 +8,7 @@ const { validationResult } = require("express-validator");
 const taskRouter = express.Router();
 
 //Get
-taskRouter.get("/task", (req, res) => {
+taskRouter.get("/", (req, res) => {
   taskService
     .getTasks(req, res)
     .then((result) => {
@@ -20,7 +20,7 @@ taskRouter.get("/task", (req, res) => {
 });
 
 //Add Task
-taskRouter.post("/task", validateTask, (req, res) => {
+taskRouter.post("/", validateTask, (req, res) => {
   const errors = validationResult(req)
     .array()
     .map((error) => error.msg);
@@ -38,7 +38,7 @@ taskRouter.post("/task", validateTask, (req, res) => {
 
 //TODO: Add userId Header
 //Get Task By Id
-taskRouter.get("/task/:id", async (req, res) => {
+taskRouter.get("/:id", async (req, res) => {
   try {
     const result = await taskService.getTaskById(req.params.id);
 
@@ -50,7 +50,7 @@ taskRouter.get("/task/:id", async (req, res) => {
 });
 
 //Update Task
-taskRouter.patch("/task/:id", async (req, res) => {
+taskRouter.patch("/:id", async (req, res) => {
   await taskService.updateTask(req.params.id, req.body).then((result) => {
     taskResponses.sendSuccess(res, messages.SUCCESSFUL, result);
   }).catch((e) => { 
@@ -59,7 +59,7 @@ taskRouter.patch("/task/:id", async (req, res) => {
 });
 
 //Delete Task
-taskRouter.delete("/task/:id", async (req, res) => {
+taskRouter.delete("/:id", async (req, res) => {
     const result = await taskService.deleteTask(req.params.id);
     if(result){
         taskResponses.sendSuccess(res, messages.SUCCESSFUL, "Task deleted");}
