@@ -1,6 +1,4 @@
-/**
- * Created by Syed Afzal
- */
+
 const mongoose = require("mongoose");
 
 exports.connect = (app) => {

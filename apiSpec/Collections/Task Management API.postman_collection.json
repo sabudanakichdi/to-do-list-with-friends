@@ -1,0 +1,74 @@
+{
+	"info": {
+		"_postman_id": "5fa83b96-3f23-4199-bc3b-f30e2983e91b",
+		"name": "Task Management API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "10273443",
+		"_collection_link": "https://planetary-trinity-172935.postman.co/workspace/Team-Alpha-Workspace~5b7b066f-857d-4f28-b12f-21eb41d894bd/collection/10273443-5fa83b96-3f23-4199-bc3b-f30e2983e91b?action=share&source=collection_link&creator=10273443"
+	},
+	"item": [
+		{
+			"name": "Get Tasks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/api/task"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Task",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\":\"Hello\",\n    \"priority\":\"LOW\",\n    \"status\":\"done\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/api/task"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Task by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/api/task/6530a4415a00c03cd4e30c19"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Task",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Pick up\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/api/task/6530a4415a00c03cd4e30c19"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete task",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:3000/api/task/65309bc3a77051892f3b13ce"
+			},
+			"response": []
+		}
+	]
+}
