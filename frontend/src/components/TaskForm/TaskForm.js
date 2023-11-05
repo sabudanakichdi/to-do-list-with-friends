@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './TaskForm.css';
 import axios from 'axios';
-
+import GroupTaskForm from './GroupTaskForm';
 function TaskForm() {
   const [formData, setFormData] = useState({
     title: '',
@@ -23,14 +23,19 @@ function TaskForm() {
     }));
   };
 
+  const handleNewGroup = async (event) => {
 
+    event.preventDefault();
+
+
+  };
   const handleCreateTask = async (event) => {
   
     let missingFields = [];
-    if (!formData.title) missingFields.push('Title');
-    if (!formData.description) missingFields.push('Description');
-    if (!formData.status) missingFields.push('Status');
-    if (!formData.priority) missingFields.push('Priority');
+    if (!formData.title) missingFields.push("Title");
+    if (!formData.description) missingFields.push("Description");
+    if (!formData.status) missingFields.push("Status");
+    if (!formData.priority) missingFields.push("Priority");
   
     if (missingFields.length > 0) {
       alert(`Please fill out the following fields: ${missingFields.join(', ')}`);
@@ -67,11 +72,8 @@ function TaskForm() {
       <div className="group-container">
     <label htmlFor="group">Group</label>
     <div className="group-input-button">
-        <select id="group" name="group" value={formData.group} onChange={handleInputChange}>
-            <option value="" disabled>Please select</option>
-            {/* You can map over your groups here */}
-        </select>
-        <button type="button" className="add-group-btn">+ New</button>
+        <GroupTaskForm />
+        <button type="button" className="add-group-btn" onClick={handleNewGroup}>+ New</button>
     </div>
 </div>
 

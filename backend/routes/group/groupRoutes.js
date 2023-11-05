@@ -1,17 +1,14 @@
 const express = require("express");
-const { validateTask } = require("../../middleware/validator/taskValidator");
 const groupService = require("../../services/groupService");
 const serviceResponses = require("../../utils/helpers/responses");
 const messages = require("../../utils/helpers/messages");
-const { validationResult } = require("express-validator");
 const taskService = require("../../services/taskService");
 
 const groupRouter = express.Router();
 
-//Get
+//Get Groups
 groupRouter.get("/", (req, res) => {
-  groupService
-    .getGroup(req, res)
+  groupService.getGroups()
     .then((result) => {
       serviceResponses.sendSuccess(res, messages.SUCCESSFUL, result);
     })
@@ -21,17 +18,11 @@ groupRouter.get("/", (req, res) => {
 });
 
 //Add Group
-groupRouter.post("/", validateTask, (req, res) => {
-  // const errors = validationResult(req)
-  //   .array()
-  //   .map((error) => error.msg);
-  // if (errors.length > 0) {
-  //   return res.status(499).json(errors);
-  // }
+groupRouter.post("/", (req, res) => {
 
   const result = groupService.createGroup(req.body);
   if (result) {
-    serviceResponses.sendSuccess(res, messages.SUCCESSFUL, result);
+    serviceResponses.sendSuccess(res, messages.SUCCESSFUL, "Group created successfully");
   } else {
     serviceResponses.sendError(res, messages.BAD_REQUEST, e);
   }
@@ -53,7 +44,7 @@ groupRouter.get("/:id", async (req, res) => {
   }
 });
 
-//Update Task
+//Update Group
 groupRouter.patch("/:id", async (req, res) => {
   await groupService.updateGroup(req.params.id, req.body).then((result) => {
     serviceResponses.sendSuccess(res, messages.SUCCESSFUL, result);
@@ -62,7 +53,7 @@ groupRouter.patch("/:id", async (req, res) => {
   });
 });
 
-//Delete Task
+//Delete Group
 groupRouter.delete("/:id", async (req, res) => {
     const result = await groupService.deleteGroup(req.params.id);
     if(result){
