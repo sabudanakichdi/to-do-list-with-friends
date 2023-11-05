@@ -38,7 +38,7 @@ function GroupComboBox() {
           setSelectedGroup(newValue);
         }}
         renderInput={(params) => <TextField {...params} label="Select a group" />}
-      />
+      className='group-options'/>
     </div>
   );
 }

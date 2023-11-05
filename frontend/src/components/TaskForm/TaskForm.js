@@ -72,7 +72,7 @@ function TaskForm() {
       <div className="group-container">
     <label htmlFor="group">Group</label>
     <div className="group-input-button">
-        <GroupTaskForm />
+        <GroupTaskForm/>
         <button type="button" className="add-group-btn" onClick={handleNewGroup}>+ New</button>
     </div>
 </div>
