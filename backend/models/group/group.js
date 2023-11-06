@@ -1,13 +1,13 @@
 
 const  mongoose = require("mongoose");
-const Task = mongoose.model("Group", {
+const Group = mongoose.model("Group", {
   id: {
     type: String,
     trim: true,
     required: true,
   },
   name: {
-    type: String,// Can be Group object
+    type: String,
     trim: true,
   },
   totalTask: {
@@ -28,4 +28,4 @@ const Task = mongoose.model("Group", {
   }
 });
 
-module.exports = { Task };
+module.exports = { Group };
