@@ -1,12 +1,11 @@
 import { Stack, Button, Grid,TextField, Box } from '@mui/material';
 import React from 'react';
 import config from '../../config.json';
-// import axios from axios;
+import axios from 'axios';
 
 const backendUrl = config.backendUrl;
 
 function LoginComp() {
-  const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -14,13 +13,14 @@ function LoginComp() {
     e.preventDefault();
 console.log(email);
 console.log(password);
-// const response = await fetch(backendUrl+'/auth/login', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify({ email, password }),
-//   });
+const response = await axios.post(backendUrl+'/auth/login', {
+    email: email,
+    
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email, password }),
+  });
 
   // If the login is successful, store the user's authentication token in local storage
   if (response.status === 200) {
@@ -28,12 +28,13 @@ console.log(password);
     // localStorage.setItem('authToken', token);
 
     // Redirect the user to the home page
-    window.location.href = '/';
-  } else {
-    // TODO: Display an error message to the user
-    alert('Invalid email or password');
-  }   
-};
+    window.location.href = '/task';
+  // } else {
+  //   // TODO: Display an error message to the user
+  //   alert('Invalid email or password');
+  // }   
+ };
+}
 
   return (
          
@@ -56,12 +57,12 @@ console.log(password);
     </Grid>
     <Grid item xs={24} sm={12}>
         <Stack direction='row'>
-            <Button variant="text" >Register</Button>
-            <Button variant="text" >Forgot Password?</Button>
+            <Button variant="text" onClick={()=>{window.location.href = '/register'}}>Register</Button>
+            <Button variant="text" onClick={()=>{window.location.href = '/forgot'}}>Forgot Password?</Button>
         </Stack>
     </Grid>
         </Grid>                    
   );
 }
 
-export default LoginComp;
+ export default LoginComp;

@@ -1,6 +1,5 @@
 import React from 'react';
 import { TextField,Button, Grid } from '@mui/material';
-// import config from '../config.json';
 import config from '../../config.json';
 
 const backendUrl = config.backendUrl;
@@ -16,7 +15,7 @@ function RegisterComp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    window.location.href = '/login';
     // Validate the form fields
     if (username === '') {
       alert('Please enter a username.');
@@ -66,28 +65,28 @@ function RegisterComp() {
 
   return (
 <Grid
-  container  my={8} 
+  container  //my={8} 
   direction="column"
   alignItems="center"
   justifyContent="center"  
   spacing={2} minWidth='50%'
   >       
-    <Grid item xs={24} sm={12} >        
+    <Grid item xs={12} sm={12} >        
         <TextField type="text" label="Username" fullWidth   variant="outlined" color="primary" focused  size='50' alignself= 'center'  placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} xs={1} />        
         <TextField type="tel" label="Contact" fullWidth   variant="outlined" color="primary" focused  size='50' alignself= 'center'  placeholder="Contact" value={contact} onChange={(e) => setContact(e.target.value)} xs={1} />        
     </Grid>  
-    <Grid item xs={24} sm={12}>
+    <Grid item xs={12} sm={12}>
         <TextField type="password" label="Password" fullWidth  variant="outlined" color="primary" focused  alignself= 'center' placeholder="Password" value={npassword} onChange={(e) => setNpassword(e.target.value)} /> 
         <TextField type="password" label="Confirm Password" fullWidth  variant="outlined" color="primary" focused  alignself= 'center' placeholder="Confirm Password" value={cpassword} onChange={(e) => setCpassword(e.target.value)} /> 
     </Grid>
-    <Grid item xs={24} sm={12}>
+    <Grid item xs={12} sm={12}>
         <TextField type="text" label="First Name" fullWidth  variant="outlined" color="primary" focused  alignself= 'center' placeholder="First Name" value={fname} onChange={(e) => setFName(e.target.value)} /> 
         <TextField type="text" label="Last Name" fullWidth  variant="outlined" color="primary" focused  alignself= 'center' placeholder="Last Name" value={lname} onChange={(e) => setLName(e.target.value)} /> 
     </Grid>
-    <Grid item xs={24} sm={12}>
+    <Grid item xs={12} sm={12}>
         <TextField type="email" label="Email" fullWidth  variant="outlined" color="primary" focused  alignself= 'center' placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} /> 
     </Grid>
-    <Grid item xs={24} sm={12}>
+    <Grid item xs={12} sm={12}>
         <Button alignself= 'center' fullWidth  variant="contained" type="submit" onClick={handleSubmit}>Register</Button>
     </Grid>
   </Grid> 

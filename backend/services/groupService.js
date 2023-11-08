@@ -3,13 +3,12 @@ const { Group } = require("../models/group/group");
 const groupService = {
     async getGroups() {
       try{
-          const groups = await Group.find({},'_id id').exec();
+          const groups = await Group.find({},'_id name').exec();
           
           const groupMap = {};
           groups.forEach((group) => {
-            groupMap[group._id] = group.id;
+            groupMap[group._id] = group.name;
           });
-          console.log("GroupMap",groups);
           return groupMap;
     
         }catch(e){
@@ -20,9 +19,11 @@ const groupService = {
 
     async createGroup(group) {
         const newGroup = new Group(group);
-         newGroup.save();
-        return newGroup;
-
+        await newGroup.save();
+        return {
+          _id: newGroup._id,
+          name: newGroup.name,
+      };
     },
 
     async getGroupById(id) {

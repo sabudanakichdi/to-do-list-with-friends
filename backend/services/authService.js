@@ -29,7 +29,7 @@ const authService = {
     // const newTask = new Task(req.body);
 
     // Simulate user registration
-    const newuser = new User ({email: body.email, first_name:body.first_name, last_name:body.last_name,password:hashedPassword,username:body.username,contact:body.contact });    
+    const newuser = new User ({email: body.email, first_name:body.first_name, last_name:body.last_name,password:hashedPassword,username:body.username,contact:body.contact,groups:body.groups });    
     newuser.save();
     
     return newuser;
@@ -82,6 +82,28 @@ const authService = {
 
     return token;
   },
+  users: async () => {
+    const users = await User.find({},'_id email first_name last_name username contact groups').exec();
+    const transformedUsers = users.map((user) => ({
+      _id: user._id,
+      email: user.email,
+      username: user.username,
+      groups: user.groups,
+    }));
+    return transformedUsers;
+  },
+  usersByGroup: async (group) => {
+
+    const users = await User.find({groups:group},'_id email first_name last_name username contact').exec();
+    const transformedUsers = users.map((user) => ({
+      _id: user._id,
+      email: user.email,
+      username: user.username,
+      groups: user.groups,
+    }));
+    return transformedUsers;
+
+  }
 };
 
 module.exports = authService;
