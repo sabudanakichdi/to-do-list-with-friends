@@ -1,14 +1,10 @@
 
 const  mongoose = require("mongoose");
 const Group = mongoose.model("Group", {
-  id: {
-    type: String,
-    trim: true,
-    required: true,
-  },
   name: {
     type: String,
     trim: true,
+    required: true,
   },
   totalTask: {
     type: Array,

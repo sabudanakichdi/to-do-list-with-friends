@@ -30,7 +30,7 @@ const Task = mongoose.model("Task", {
     type: String,//Needs to be User object
     trim: true,
   },
-  deadLine: {
+  endDate: {
     type: Date,
     trim: true,
   },

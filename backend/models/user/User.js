@@ -31,6 +31,10 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  groups:{
+    type: Array,
+    trim: true,
+  },
 });
 
 // Create the User model
