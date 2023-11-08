@@ -17,13 +17,13 @@
     display: flex;
     align-items: center;
     margin-right: auto;
-    padding-left: 180px; /* This may need adjustment */
+    padding-left: 180px; 
   }
   
   .pie-chart-title-container {
     display: flex;
     align-items: center;
-    padding-right: 400px; /* This may need adjustment */
+    padding-right: 400px; 
   }
   
   .pie-charts {
@@ -48,23 +48,21 @@
   }
 
   .task-cards-container {
-    /* Add your styles here to lay out the task cards container */
-    width: 100%; /* Example: Take up the full width */
+    
+    width: 100%; 
     display: flex;
-    justify-content: space-around; /* Example: Space out cards evenly */
-    padding: 20px; /* Example: Add some padding */
-    /* More styles as per your design requirements */
+    justify-content: space-around; 
+    padding: 20px; 
+    
 }
 
 
-  
-/* Adjust the position of the search-and-tags container */
 .search-and-tags {
-    align-self: flex-start; /* Aligns the container to the start of the flex container, which is the top */
-    margin-top: -20px; /* Pushes the container upwards; adjust the value as needed */
-    margin-left: -20px; /* Pushes the container towards the left; adjust the value as needed */
+    align-self: flex-start; 
+    margin-top: -20px;
+    margin-left: -20px; 
   }
   .add-task-btn {
-    /* Your styles for the button */
+    /* Add styles for the button */
   }
   
