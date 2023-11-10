@@ -7,6 +7,23 @@ import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
+
+const priorityChipStyles = {
+    High: {
+      backgroundColor: '#ff4a4a', 
+      color: 'black',
+    },
+    Medium: {
+      backgroundColor: '#ffb74a', 
+    },
+    Low: {
+      backgroundColor: '#ececec', 
+      color: 'black',
+    },
+  };
+  
+  
+
 const tasks = {
   groups: [
     { name: 'SE Capstone', inProgress: 5, toDo: 5, completed: 5 },
@@ -17,11 +34,42 @@ const tasks = {
     // ... other group tasks
   ],
   personal: [
-    // personal tasks structured for the table
-  ],
-};
+    {
+        priority: 'High',
+        title: 'Article 1',
+        status: 'In progress',
+        tags: 'Tag 1',
+        owner: 'Akash A',
+        startDate: new Date('2023-01-10'),
+        endDate: new Date('2023-01-12')
+      },
+
+      {
+        priority: 'Medium',
+        title: 'Article 2',
+        status: 'In progress',
+        tags: 'Tag 2',
+        owner: 'Akash A',
+        startDate: new Date('2023-01-10'),
+        endDate: new Date('2023-10-12')
+      },
+
+      {
+        priority: 'Low',
+        title: 'Article 3',
+        status: 'In progress',
+        tags: 'Tag 3',
+        owner: 'Akash A',
+        startDate: new Date('2023-01-10'),
+        endDate: new Date('2023-04-12')
+      },
+      // ...more tasks
+    ],
+  };
 
 const ITEMS_PER_PAGE = 4;
+
+
 
 export default function TaskCards() {
   const [value, setValue] = useState('groups');
@@ -35,6 +83,15 @@ export default function TaskCards() {
     setPage(value);
   };
 
+  const getPriorityChip = (priority) => {
+    return (
+      <Chip
+        label={priority}
+        size="small"
+        sx={{ ...priorityChipStyles[priority], borderRadius: '4px' }}
+      />
+    );
+  };
   // Calculate the current items for the active page
   const indexOfLastItem = page * ITEMS_PER_PAGE;
   const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
@@ -181,13 +238,13 @@ export default function TaskCards() {
             <TableBody>
               {tasks.personal.map((task, index) => (
                 <TableRow key={index}>
-                  <TableCell>{task.priority}</TableCell>
+                  <TableCell>{getPriorityChip(task.priority)}</TableCell>
                   <TableCell>{task.title}</TableCell>
                   <TableCell>{task.status}</TableCell>
-                  <TableCell>{task.tags.join(', ')}</TableCell> {/* Assuming tags is an array */}
+                  <TableCell>{task.tags}</TableCell>
                   <TableCell>{task.owner}</TableCell>
-                  <TableCell>{task.startDate.toLocaleDateString()}</TableCell> {/* Assuming startDate is a Date object */}
-                  <TableCell>{task.endDate.toLocaleDateString()}</TableCell> {/* Assuming endDate is a Date object */}
+                  <TableCell>{task.startDate.toLocaleDateString()}</TableCell>
+                  <TableCell>{task.endDate.toLocaleDateString()}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
