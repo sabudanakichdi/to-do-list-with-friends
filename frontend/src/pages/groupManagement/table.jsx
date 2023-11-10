@@ -22,14 +22,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 
-function createData(id, name, calories, fat, carbs, protein) {
+function createData({ id, title, priority, status, tags, owner, startDate, endDate } = {}) {
   return {
     id,
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
+    title, priority, status, tags, owner, startDate, endDate
   };
 }
 
@@ -42,7 +38,21 @@ const groupInfo = {
     "totalToDo": 10,
     "tasks": [
       {
-        "id": "asd1123",
+        "id": "asd11",
+        "title": "Pick up Flowers",
+        "group": "household",
+        "tags": "gift",
+        "description": "Pick up flower for mom from flower shop at Baker street",
+        "priority": "LOW",
+        "status": "TODO",
+        "assignedTo": "Jane",
+        "deadLine": "08/26/23",
+        "startDate": "08/26/23",
+        "createdBy": "John",
+        "createdOn": "08/24/23"
+      },
+      {
+        "id": "asd112",
         "title": "Pick up Flowers",
         "group": "household",
         "tags": "gift",
@@ -70,21 +80,7 @@ const groupInfo = {
         "createdOn": "08/24/23"
       },
       {
-        "id": "asd1123",
-        "title": "Pick up Flowers",
-        "group": "household",
-        "tags": "gift",
-        "description": "Pick up flower for mom from flower shop at Baker street",
-        "priority": "LOW",
-        "status": "TODO",
-        "assignedTo": "Jane",
-        "deadLine": "08/26/23",
-        "startDate": "08/26/23",
-        "createdBy": "John",
-        "createdOn": "08/24/23"
-      },
-      {
-        "id": "asd1123",
+        "id": "asd11233",
         "title": "Pick up Flowers",
         "group": "household",
         "tags": "gift",
@@ -110,21 +106,9 @@ const groupInfo = {
     ]
   }
 
-const rows = [
-  createData(1, 'Cupcake', 305, 3.7, 67, 4.3),
-  createData(2, 'Donut', 452, 25.0, 51, 4.9),
-  createData(3, 'Eclair', 262, 16.0, 24, 6.0),
-  createData(4, 'Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData(5, 'Gingerbread', 356, 16.0, 49, 3.9),
-  createData(6, 'Honeycomb', 408, 3.2, 87, 6.5),
-  createData(7, 'Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData(8, 'Jelly Bean', 375, 0.0, 94, 0.0),
-  createData(9, 'KitKat', 518, 26.0, 65, 7.0),
-  createData(10, 'Lollipop', 392, 0.2, 98, 0.0),
-  createData(11, 'Marshmallow', 318, 0, 81, 2.0),
-  createData(12, 'Nougat', 360, 19.0, 9, 37.0),
-  createData(13, 'Oreo', 437, 18.0, 63, 4.0),
-];
+const rows = groupInfo.tasks.map(task => createData(task));
+
+console.log(rows)
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -160,34 +144,46 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: 'name',
+    id: 'priority',
     numeric: false,
-    disablePadding: true,
-    label: 'Dessert (100g serving)',
+    disablePadding: false,
+    label: 'Priority',
   },
   {
-    id: 'calories',
+    id: 'title',
     numeric: true,
     disablePadding: false,
-    label: 'Calories',
+    label: 'Title',
   },
   {
-    id: 'fat',
+    id: 'status',
     numeric: true,
     disablePadding: false,
-    label: 'Fat (g)',
+    label: 'Status',
   },
   {
-    id: 'carbs',
+    id: 'tags',
     numeric: true,
     disablePadding: false,
-    label: 'Carbs (g)',
+    label: 'Tags',
   },
   {
-    id: 'protein',
+    id: 'owner',
     numeric: true,
     disablePadding: false,
-    label: 'Protein (g)',
+    label: 'Owner',
+  },
+  {
+    id: 'startDate',
+    numeric: true,
+    disablePadding: false,
+    label: 'Start Date',
+  },
+  {
+    id: 'endDate',
+    numeric: true,
+    disablePadding: false,
+    label: 'End Date',
   },
 ];
 
@@ -307,7 +303,8 @@ export default function EnhancedTable() {
 //   );
 
   return (
-    <Box sx={{ width: '100%' }} p={2}>
+    <>
+    <Box sx={{ width: '70%' }} p={2}>
       <Paper sx={{ width: '100%', mb: 2 }}>
         <TableContainer>
           <Table
@@ -340,17 +337,19 @@ export default function EnhancedTable() {
                     sx={{ cursor: 'pointer', ml: 2 }}
                   >
                     <TableCell
-                    padding="checkbox"
+                    // padding="checkbox"
                       component="th"
                       id={labelId}
                       scope="row"
                     >
-                      {row.name}
+                      {row.priority}
                     </TableCell>
-                    <TableCell align="right">{row.calories}</TableCell>
-                    <TableCell align="right">{row.fat}</TableCell>
-                    <TableCell align="right">{row.carbs}</TableCell>
-                    <TableCell align="right">{row.protein}</TableCell>
+                    <TableCell align="right">{row.title}</TableCell>
+                    <TableCell align="right">{row.status}</TableCell>
+                    <TableCell align="right">{row.tags}</TableCell>
+                    <TableCell align="right">{row.owner}</TableCell>
+                    <TableCell align="right">{row.startDate}</TableCell>
+                    <TableCell align="right">{row.endDate}</TableCell>
                   </TableRow>
                 );
               })}
@@ -366,16 +365,11 @@ export default function EnhancedTable() {
             </TableBody>
           </Table>
         </TableContainer>
-        {/* <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        /> */}
       </Paper>
     </Box>
+    <Box sx={{ width: '100%' }} p={2}>
+      
+    </Box>
+    </>
   );
 }
