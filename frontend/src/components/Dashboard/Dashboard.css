@@ -1,0 +1,68 @@
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .dashboard-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px 0;
+  }
+  
+  .task-group-selection {
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+    padding-left: 180px; 
+  }
+  
+  .pie-chart-title-container {
+    display: flex;
+    align-items: center;
+    padding-right: 400px; 
+  }
+  
+  .pie-charts {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .pie-chart-title {
+    /* Adjust this value to align with the dropdown as necessary */
+    margin-left: 20px;
+  }
+  
+  
+  .task-lists {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .task-cards-container {
+    
+    width: 100%; 
+    display: flex;
+    justify-content: space-around; 
+    padding: 20px; 
+    
+}
+
+
+.search-and-tags {
+    align-self: flex-start; 
+    margin-top: -20px;
+    margin-left: -20px; 
+  }
+  .add-task-btn {
+    /* Add styles for the button */
+  }
+  
