@@ -1,114 +1,18 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
+import Avatar from '@mui/material/Avatar';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
+import Container from '@mui/material/Container';
 import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterList';
+import Paper from '@mui/material/Paper';
 import { visuallyHidden } from '@mui/utils';
-
-function createData({ id, title, priority, status, tags, owner, startDate, endDate } = {}) {
-  return {
-    id,
-    title, priority, status, tags, owner, startDate, endDate
-  };
-}
-
-const groupInfo = {
-    "id": "asdasdas213",
-    "name": "household",
-    "totalTask": 10,
-    "totalInProgress": 10,
-    "totalCompleted": 10,
-    "totalToDo": 10,
-    "tasks": [
-      {
-        "id": "asd11",
-        "title": "Pick up Flowers",
-        "group": "household",
-        "tags": "gift",
-        "description": "Pick up flower for mom from flower shop at Baker street",
-        "priority": "LOW",
-        "status": "TODO",
-        "assignedTo": "Jane",
-        "deadLine": "08/26/23",
-        "startDate": "08/26/23",
-        "createdBy": "John",
-        "createdOn": "08/24/23"
-      },
-      {
-        "id": "asd112",
-        "title": "Pick up Flowers",
-        "group": "household",
-        "tags": "gift",
-        "description": "Pick up flower for mom from flower shop at Baker street",
-        "priority": "LOW",
-        "status": "TODO",
-        "assignedTo": "Jane",
-        "deadLine": "08/26/23",
-        "startDate": "08/26/23",
-        "createdBy": "John",
-        "createdOn": "08/24/23"
-      },
-      {
-        "id": "asd1123",
-        "title": "Pick up Flowers",
-        "group": "household",
-        "tags": "gift",
-        "description": "Pick up flower for mom from flower shop at Baker street",
-        "priority": "LOW",
-        "status": "TODO",
-        "assignedTo": "Jane",
-        "deadLine": "08/26/23",
-        "startDate": "08/26/23",
-        "createdBy": "John",
-        "createdOn": "08/24/23"
-      },
-      {
-        "id": "asd11233",
-        "title": "Pick up Flowers",
-        "group": "household",
-        "tags": "gift",
-        "description": "Pick up flower for mom from flower shop at Baker street",
-        "priority": "LOW",
-        "status": "TODO",
-        "assignedTo": "Jane",
-        "deadLine": "08/26/23",
-        "startDate": "08/26/23",
-        "createdBy": "John",
-        "createdOn": "08/24/23"
-      }
-    ],
-    "members": [
-      {
-        "memberName": "mem123id",
-        "userCount": {
-          "toDo": 1,
-          "inProgress": 1,
-          "completed": 8
-        }
-      }
-    ]
-  }
-
-const rows = groupInfo.tasks.map(task => createData(task));
-
-console.log(rows)
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -124,6 +28,13 @@ function getComparator(order, orderBy) {
   return order === 'desc'
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
+}
+
+function createData({ id, title, priority, status, tags, owner, startDate, endDate } = {}) {
+  return {
+    id,
+    title, priority, status, tags, owner, startDate, endDate
+  };
 }
 
 // Since 2020 all major browsers ensure sort stability with Array.prototype.sort().
@@ -232,9 +143,10 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-export default function EnhancedTable() {
+export default function EnhancedTable(props = {}) {
+  const { groupInfo: { tasks = [], members = [] } = {} } = props;
   const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
+  const [orderBy, setOrderBy] = React.useState('priority');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
@@ -274,19 +186,6 @@ export default function EnhancedTable() {
     setSelected(newSelected);
   };
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
-  const handleChangeDense = (event) => {
-    setDense(event.target.checked);
-  };
-
   const isSelected = (id) => selected.indexOf(id) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
@@ -302,74 +201,89 @@ export default function EnhancedTable() {
 //     [order, orderBy, page, rowsPerPage],
 //   );
 
-  return (
-    <>
-    <Box sx={{ width: '70%' }} p={2}>
-      <Paper sx={{ width: '100%', mb: 2 }}>
-        <TableContainer>
-          <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
-          >
-            <EnhancedTableHead
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
-              onRequestSort={handleRequestSort}
-              rowCount={rows.length}
-            />
-            <TableBody>
-              {rows.map((row, index) => {
-                const isItemSelected = isSelected(row.id);
-                const labelId = `enhanced-table-checkbox-${index}`;
+  const rows = tasks.map(task => createData(task));
 
-                return (
-                  <TableRow
-                    hover
-                    onClick={(event) => handleClick(event, row.id)}
-                    role="checkbox"
-                    aria-checked={isItemSelected}
-                    tabIndex={-1}
-                    key={row.id}
-                    selected={isItemSelected}
-                    sx={{ cursor: 'pointer', ml: 2 }}
-                  >
-                    <TableCell
-                    // padding="checkbox"
-                      component="th"
-                      id={labelId}
-                      scope="row"
+  return (
+    <Container maxWidth="lg" sx={{ display: 'flex' }}>
+      <Box sx={{ width: '100%' }} p={2}>
+        <Paper sx={{ width: '100%', mb: 2 }}>
+          <TableContainer>
+            <Table
+              sx={{ minWidth: 750 }}
+              aria-labelledby="tableTitle"
+              size={dense ? 'small' : 'medium'}
+            >
+              <EnhancedTableHead
+                numSelected={selected.length}
+                order={order}
+                orderBy={orderBy}
+                onSelectAllClick={handleSelectAllClick}
+                onRequestSort={handleRequestSort}
+                rowCount={rows.length}
+              />
+              <TableBody>
+                {rows.map((row, index) => {
+                  const isItemSelected = isSelected(row.id);
+                  const labelId = `enhanced-table-checkbox-${index}`;
+
+                  return (
+                    <TableRow
+                      hover
+                      onClick={(event) => handleClick(event, row.id)}
+                      role="checkbox"
+                      aria-checked={isItemSelected}
+                      tabIndex={-1}
+                      key={row.id}
+                      selected={isItemSelected}
+                      sx={{ cursor: 'pointer', ml: 2 }}
                     >
-                      {row.priority}
-                    </TableCell>
-                    <TableCell align="right">{row.title}</TableCell>
-                    <TableCell align="right">{row.status}</TableCell>
-                    <TableCell align="right">{row.tags}</TableCell>
-                    <TableCell align="right">{row.owner}</TableCell>
-                    <TableCell align="right">{row.startDate}</TableCell>
-                    <TableCell align="right">{row.endDate}</TableCell>
+                      <TableCell
+                      // padding="checkbox"
+                        component="th"
+                        id={labelId}
+                        scope="row"
+                      >
+                        {row.priority}
+                      </TableCell>
+                      <TableCell align="right">{row.title}</TableCell>
+                      <TableCell align="right">{row.status}</TableCell>
+                      <TableCell align="right">{row.tags}</TableCell>
+                      <TableCell align="right">{row.owner}</TableCell>
+                      <TableCell align="right">{row.startDate}</TableCell>
+                      <TableCell align="right">{row.endDate}</TableCell>
+                    </TableRow>
+                  );
+                })}
+                {emptyRows > 0 && (
+                  <TableRow
+                    style={{
+                      height: (dense ? 33 : 53) * emptyRows,
+                    }}
+                  >
+                    <TableCell colSpan={6} />
                   </TableRow>
-                );
-              })}
-              {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: (dense ? 33 : 53) * emptyRows,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Paper>
-    </Box>
-    <Box sx={{ width: '100%' }} p={2}>
-      
-    </Box>
-    </>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Paper>
+      </Box>
+      <Box sx={{ width: '100%', bgcolor: '#f8f8f8', mt: 2 }} p={2}>
+          <Box sx={{  py: 0.5, width: '100%', borderBottom: '1px solid #f3dada', fontWeight: 'bold' }}>
+              Members
+          </Box>
+          <Box sx={{ py: 0.5, width: '100%' }}>
+              {
+                members.map(({ memberName = '', userCount: { completed = 0 } = {}} = {}) => (
+                <Box sx={{ py: 1.25, display: 'flex', alignItems: 'center' }}>
+                    <Checkbox size="small" sx={{ p: 0.25 }} />
+                    <Avatar src="/broken-image.jpg" sx={{ width: 24, height: 24, mx: 1 }} />
+                    {memberName}
+                    <Box sx={{ marginLeft: 'auto'}}>{completed}</Box>
+                </Box>))
+              }
+          </Box>
+      </Box>
+    </Container>
   );
 }

@@ -3,11 +3,11 @@ import { AppBar, Toolbar, Typography, Box, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import AddIcon from '@mui/icons-material/Add';
 
-const Navbar = () => (
+const Navbar = ({ groupInfo: { name: groupName = 'NA' } = {} } = {}) => (
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          GROUP:
+          GROUP: {groupName}
         </Typography>
         <Box component = "div"sx={{ display: "flex", gap: "9px" }}>
           <Typography variant="h6" className="nav-item">
