@@ -1,8 +1,4 @@
 const { Task } = require("../models/tasks/task");
-const taskResponses = require("../utils/helpers/responses");
-const messages = require("../utils/helpers/messages");
-const { validationResult } = require("express-validator");
-const { response } = require("express");
 const allowedUpdates = [
   "title",
   "group",
@@ -16,6 +12,13 @@ const allowedUpdates = [
   "createdBy",
 ];
 const taskService = {
+  async getTaskByGroup(groupName) {
+    const taskArray = await Task.find({"group": groupName})
+    if (taskArray)
+      return taskArray;
+    return null
+  },
+
   async getTasks() {
     return Task.find({}, { __v: 0 });
   },

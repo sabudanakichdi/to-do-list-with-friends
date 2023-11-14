@@ -1,6 +1,5 @@
 import React from 'react';
 import { TextField,Button, Grid } from '@mui/material';
-// import config from '../config.json';
 import config from '../../config.json';
 
 const backendUrl = config.backendUrl;
@@ -42,23 +41,23 @@ function RegisterComp() {
       alert('Your new password and confirm password do not match.');
       return;
     }
-
+    const response = await axios.post(backendUrl+'/auth/register', 
+        { email: email , username:username,contact:contact,first_name:fname,last_name:lname, password: npassword },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
     // Submit the form
-    const response = await fetch(backendUrl+'/auth/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email: email , username:username,contact:contact,first_name:fname,last_name:lname, password: npassword }),
-    });
 
     if (response.status === 200) {
       alert("User registered successfully");
+      window.location.href = '/login';
       // User registered successfully
       // setSuccessMessage('You have been registered successfully!');
     } else {
       // Registration failed
-      console.log(response);
+      // console.log(response);
       alert(response.body);
     }
   };

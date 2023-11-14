@@ -6,7 +6,7 @@ require("./config/config");
 const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
-const router = require("./routes");
+const router = require("./routes/index");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const db = require("./db");
@@ -27,7 +27,7 @@ app.use('/api',router);
 
 app.on("ready", () => {
   app.listen(3000, () => {
-    console.log("Server is up on port", 3000);
+    console.log("Server is up on port",3000);
   });
 });
 

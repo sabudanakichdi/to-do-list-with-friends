@@ -25,6 +25,32 @@ const authController = {
       res.status(400).json({ message: error.message });
     }
   },
+
+  users: async (req, res) => {
+    try {
+      const users = await authService.users();
+      res.json(users);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  },
+
+  usersByGroup: async (req, res) => {
+    try {
+      const users = await authService.usersByGroup(req.params.name);
+      res.json(users);
+      }catch(error){
+        res.status(400).json({ message: error.message });
+      }
+  },
+
+  inviteByMail: async (req,res) => {
+    try {
+      const users =await authService.invitebymail(res.body.email)
+    }catch(error){
+      res.status(400).json({ message: error.message });
+    }  
+  }
 };
 
 module.exports = authController;
