@@ -22,12 +22,8 @@ function ResetpwdComp() {
         },
         body: JSON.stringify({ npassword }),
       });
-      // Submit the form
-      // TODO: Make a request to your backend API to reset the user's password
-  
-      // Reset password successfully
-      alert('Your password has been reset successfully!');
-    // Register the user with the backend API or local storage here
+
+      alert('Your password has been reset successfully!');    
   };
 
   return (
