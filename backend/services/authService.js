@@ -35,13 +35,20 @@ class authService {
     if (!isPasswordValid) {
       throw new Error('Invalid password');
     }
-    // jwt.sign({ id }, "HeavenOnEarth", { expiresIn: "30d" })
-    // Generate a JWT token
+
     const token= jwt.sign({ userId: user.id, email: user.email }, "JWT_SECRET", { expiresIn: '1h'});
 
     return {"token":token, "user": { username: user.username, email: user.email, first_name:user.first_name, last_name:user.last_name}};  
   }
 
+  static async isAuth(token, email) {
+    const decodedToken = jwt.verify(token, JWT_SECRET);    
+
+    if(email!==decodedToken.email)
+      return null;
+    else        
+      return {"token":token, "userid": decodedToken.userId, "email": decodedToken.email};  
+  }
 
   static async resetPwd(iemail, password) {
     const user = await User.findOne({ email: iemail });
@@ -64,7 +71,7 @@ class authService {
   static async invitebymail(email)
   {
   //  console.log(email);
-   sendmail(email,"Welcome to WeDoList","You have been invited by ");
+   sendmail(email,"Welcome to WeDoList","You have been invited to join WeDo List " + "http://localhost:3000/register");
   }
 
   

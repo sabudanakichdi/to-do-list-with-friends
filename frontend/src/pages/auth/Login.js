@@ -2,8 +2,19 @@ import { Stack, Button, Grid,TextField, Box } from '@mui/material';
 import React from 'react';
 import logo from '../../assets/logo.png'
 import LoginComp from '../../components/Auth/LoginComp'
+import { AuthVerify } from "../../context/AuthContext"
 
-function Login() {
+async function Login() {  
+  const checklogin = async () => {
+    const token = localStorage.getItem('authToken');
+    const userDetails = JSON.parse(localStorage.getItem('userDetails'));
+
+    if (token!==null && userDetails!==null && await AuthVerify()) {
+      window.location.href = '/register';
+    }   
+    console.log(this.state.user);
+  };
+  await checklogin();
 
   return (
     <Box sx={{
