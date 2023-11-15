@@ -1,108 +1,103 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { User } = require('../models/user/User')
+const { User } = require('../models/user/User');
+const { use } = require('../routes/auth/authRoutes');
+var nodemailer = require('nodemailer');
 
+const JWT_SECRET = 'JWT_SECRET'; // Replace with a strong, secret key
 
-const JWT_SECRET = 'your-secret-key'; // Replace with a strong, secret key
-
-const authService = {
-  register: async (body) => {
+class authService {
+  static async register(body) {
     // Check if the user with the same email already exists
-    // console.log(body);
-    
-    User.findOne({}, {email : body.email}).then((u) => {
-      if(!u.$isEmpty())
-      throw new Error('User with this email already exists.');
+     console.log(body);
+     User.findOne({email : body.email}).then((u) => {
+      if(!u)
+      return ('User with this email already exists.');
     })
-    .catch((e) => {
-      // taskResponses.sendError(res, messages.NOT_FOUND, e);
-      console.log(e);
-    });
-    // console.log(existingUser.);    
-    // console.log("herer");
-    // if (existingUser) {
-    //   throw new Error('User with this email already exists.');
-    // }
 
-    // Hash the user's password before storing it
     const hashedPassword = await bcrypt.hash(body.password, 10);
-    // const newTask = new Task(req.body);
 
-    // Simulate user registration
-    const newuser = new User ({email: body.email, first_name:body.first_name, last_name:body.last_name,password:hashedPassword,username:body.username,contact:body.contact,groups:body.groups });    
+    const newuser = new User ({email: body.email, first_name:body.first_name, last_name:body.last_name,password:hashedPassword,username:body.username,contact:body.contact });    
     newuser.save();
     
-    return newuser;
-  },
+    return {"status": "success", "user":newuser};
+  }
 
-  login: async (email, password) => {
+  static async login(iemail, password) {
     // Find the user by email
-    console.log(password);
-    console.log(email);
-    const user = User.find({ 'email': email }, (err, user) => {
-      if (err) {
-        console.error('Error:', err);
-      } else {
-        if (user) {
-          
-          const isPasswordValid =  bcrypt.compare(password, user.password);
+    // console.log(password);
+    // console.log(iemail);
+    const user = await User.findOne({ email: iemail });
+    if (!user) throw "Invalid Username or Password";
 
-          if (!isPasswordValid) {
-            throw new Error('Invalid password');
-          }
-      
-          // Generate a JWT token
-          const token = jwt.sign({ userId: user.id, email: user.email }, JWT_SECRET, {
-            expiresIn: '1h', // Token expiration time
-          });
-      
-          return token;          
-        } else {
-          // User not found
-          console.log('User not found');
-        }
-      }
-    });
-    // const user = User.find({u}, {u.email : email});
-    // console.log(user);
-    if (!user) {
-      throw new Error('User not found');
-    }
-    // Compare the user's input password with the hashed password in the database
     const isPasswordValid = await bcrypt.compare(password, user.password);
-
+    // console.log(isPasswordValid);
     if (!isPasswordValid) {
       throw new Error('Invalid password');
     }
-
+    // jwt.sign({ id }, "HeavenOnEarth", { expiresIn: "30d" })
     // Generate a JWT token
-    const token = jwt.sign({ userId: user.id, email: user.email }, JWT_SECRET, {
-      expiresIn: '1h', // Token expiration time
-    });
+    const token= jwt.sign({ userId: user.id, email: user.email }, "JWT_SECRET", { expiresIn: '1h'});
 
-    return token;
-  },
-  users: async () => {
-    const users = await User.find({},'_id email first_name last_name username contact groups').exec();
-    const transformedUsers = users.map((user) => ({
-      _id: user._id,
-      email: user.email,
-      username: user.username,
-      groups: user.groups,
-    }));
-    return transformedUsers;
-  },
-  usersByGroup: async (group) => {
+    return {"token":token, "user": { username: user.username, email: user.email, first_name:user.first_name, last_name:user.last_name}};  
+  }
 
-    const users = await User.find({groups:group},'_id email first_name last_name username contact').exec();
-    const transformedUsers = users.map((user) => ({
-      _id: user._id,
-      email: user.email,
-      username: user.username,
-      groups: user.groups,
-    }));
-    return transformedUsers;
 
+  static async resetPwd(iemail, password) {
+    const user = await User.findOne({ email: iemail });
+    if (!user) throw "Invalid Username or Password";
+    const hashedPassword = await bcrypt.hash(password, 10);
+    user.password=hashedPassword;
+    user.save()
+    return {"Message":"Password updated", "user": { username: user.username, email: user.email, first_name:user.first_name, last_name:user.last_name}};  
+  }
+
+
+  static async forgotPwd(iemail, uname) {    
+    const user = await User.findOne({ email: iemail , username: uname});
+    if (!user) throw "Invalid Username or email";    
+    var res=this.sendmail(user.email, "reset Password", "reset link");
+    return {"message": res.status };  
+  }
+
+
+  static async invitebymail(email)
+  {
+  //  console.log(email);
+   sendmail(email,"Welcome to WeDoList","You have been invited by ");
+  }
+
+  
+  static async sendmail(email, sub='Welcome to WeDoList', msg='You have been invited by ')
+  {
+    try{
+      var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+            user: 'wedolist411@gmail.com',
+            pass: 'uzsr jzje cjcr pocv '
+          }
+        });
+        console.log("nodemailer created");
+      var mailOptions = {
+        from: 'wedolist411@gmail.com',
+        to: email,
+        subject: sub,
+        text: msg
+      };
+      
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {          
+          console.log('Email sent: ' + info.response);
+          return info.response;
+        }
+      });
+      console.log("sent");
+    }catch(error){
+      // console.log(error);
+    }
   }
 };
 

@@ -10,6 +10,8 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import TaskForm from "./components/TaskForm/TaskForm";
 import Navbar from "./components/Navbar/Navbar";
 import Dashboard from "./components/Dashboard/Dashboard";
+import GroupManagement from "./pages/groupManagement"
+
 const theme = createTheme({
   palette: {
     secondary: {
@@ -31,13 +33,16 @@ export default class App extends React.Component {
         <Router>
           <Navbar/>
           <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/forgot" element={<Forgotpwd />} />
-          <Route path="/reset" element={<Resetpwd />} />
-          <Route path="/task" element={<TaskForm />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="*" element={<Login />} />
+
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/forgot" element={<Forgotpwd />} />
+            <Route path="/reset" element={<Resetpwd />} />
+            <Route path="/task" element={<TaskForm />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/group" element={<GroupManagement />} />
+            <Route path="*" element={<Login />} />
+            
           </Routes>
         </Router>
       </ThemeProvider>
