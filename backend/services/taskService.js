@@ -61,7 +61,7 @@ const taskService = {
         await Task.findByIdAndDelete(id);
         return true;
     }catch(e){return false}
-  }
+  },
 };
 
 module.exports = taskService;

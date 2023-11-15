@@ -1,10 +1,13 @@
 const taskRouter = require("./task/taskRoutes");
 const groupRouter = require("./group/groupRoutes");
 const authRouter = require("./auth/authRoutes");
+const dashboardRouter = require("./dashboard/dashboardRoutes");
+const express = require("express");
+const router = express.Router();
 
-const routes = (app) => {
-  app.use('/auth', authRouter);
-  app.use("/task", taskRouter);
-  app.use("/group", groupRouter)
-};
-module.exports = routes;
+router.use('/auth', authRouter);
+router.use("/task", taskRouter);
+router.use("/group", groupRouter);
+router.use("/dashboard", dashboardRouter);
+
+module.exports = router;
