@@ -31,7 +31,11 @@ jobs:
       with:
         push: true
         tags: wedolist:${{ github.sha }}
-        file: ./Dockerfile
+        file: ./frontend/Dockerfile
+    - name: Build and Push Docker Image
+      run: |
+        docker-compose build
+        docker-compose push
 
   deploy:
     runs-on: ubuntu-latest
