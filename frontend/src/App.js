@@ -9,7 +9,8 @@ import Resetpwd from "./pages/auth/Resetpwd";
 import { createTheme, ThemeProvider } from "@mui/material";
 import TaskForm from "./components/TaskForm/TaskForm";
 import Navbar from "./components/Navbar/Navbar";
-import Dashboard from "./components/Dashboard/Dashboard";
+import Dashboard from "./components/Dashboard/Dashboard";import GroupManagement from "./pages/groupManagement"
+
 const theme = createTheme({
   palette: {
     secondary: {
@@ -38,6 +39,7 @@ export default class App extends React.Component {
           <Route path="/task" element={<TaskForm />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="*" element={<Login />} />
+            <Route path="/group" element={<GroupManagement />} />
           </Routes>
         </Router>
       </ThemeProvider>

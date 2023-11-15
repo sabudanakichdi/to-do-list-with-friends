@@ -42,13 +42,13 @@ function ForgotpwdComp() {
   justifyContent="center"  
   spacing={2} minWidth='50%'
   >         
-    <Grid item xs={24} sm={12} >        
+    <Grid item xs={12} sm={12} >        
         <TextField type="username" label="username" fullWidth   variant="outlined" color="primary" focused  size='50' alignself= 'center'  placeholder="username" value={username} onChange={(e) => setusername(e.target.value)} xs={1} />        
     </Grid>    
-    <Grid item xs={24} sm={12} >        
+    <Grid item xs={12} sm={12} >        
         <TextField type="email" label="Email" fullWidth   variant="outlined" color="primary" focused  size='50' alignself= 'center'  placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} xs={1} />        
     </Grid>  
-    <Grid item xs={24} sm={12} >        
+    <Grid item xs={12} sm={12} >        
         <Button alignself= 'center' fullWidth variant="contained" type="submit" onClick={handleSubmit}>Send Verification code</Button>
     </Grid>  
         </Grid>                          

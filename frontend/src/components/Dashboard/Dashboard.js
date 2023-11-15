@@ -1,12 +1,11 @@
 import React from 'react';
 import './Dashboard.css';
-
 import PieChartComponent from './PieChartComponent';
-import TaskCategories from './TaskCategories';
-import SearchAndTags from './SearchAndTags';
 import SelectTextFields from './SelectTextFields';
 import TaskCards from './TaskCards';
-
+import Search from './Search'; 
+import Tags from './Tags';  
+import AddTaskButton from './AddTaskButton'; 
 
 function Dashboard() {
   return (
@@ -21,19 +20,22 @@ function Dashboard() {
         </div>
       </div>
       <div className="pie-charts">
-        <div>
-          <PieChartComponent type="group" />
-        </div>
-        <div>
-          <PieChartComponent type="personal" />
-        </div>
+        <PieChartComponent type="group" />
+        <PieChartComponent type="personal" />
       </div>
       
       <div className="task-cards-container">
         <TaskCards />
       </div>
-      <SearchAndTags />
-      
+      <div className="search-container">
+        <Search />
+      </div>
+      <div className="tags-container">
+        <Tags />
+      </div>
+      <div className="add-task-button-container">
+        <AddTaskButton />
+      </div>
     </div>
   );
 }

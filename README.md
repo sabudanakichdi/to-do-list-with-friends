@@ -1,4 +1,5 @@
-## Compose sample application
+[![Build Status](https://dev.azure.com/wedolist/We%20Do%20List/_apis/build/status%2Fsabudanakichdi.to-do-list-with-friends?branchName=main)](https://dev.azure.com/wedolist/We%20Do%20List/_build/latest?definitionId=1&branchName=main)
+## We Do List
 
 ### Use with Docker Development Environments
 
