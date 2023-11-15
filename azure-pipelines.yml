@@ -24,6 +24,6 @@ stages:
       displayName: Build an image
       inputs:
         command: build
-        dockerfile: '$(Build.SourcesDirectory)/compose.yaml'
+        dockerfile: '$(Build.SourcesDirectory)/backend/DcokerFile'
         tags: |
           $(tag)
