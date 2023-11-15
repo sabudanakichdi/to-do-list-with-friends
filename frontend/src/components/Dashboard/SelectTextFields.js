@@ -31,8 +31,8 @@ export default function SelectTextFields() {
     <Box
       component="form"
       sx={{
-        display: 'flex', // set display to flex to align items in a row
-        alignItems: 'center', // center items vertically
+        display: 'flex', 
+        alignItems: 'center', 
         '& .MuiTextField-root': { m: 1, minWidth: '200px' }, // adjust as necessary
       }}
       noValidate

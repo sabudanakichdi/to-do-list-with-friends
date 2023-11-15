@@ -33,36 +33,36 @@
     align-items: center;
     width: 100%;
   }
-  
-  .pie-chart-title {
-    /* Adjust this value to align with the dropdown as necessary */
-    margin-left: 20px;
-  }
-  
-  
-  .task-lists {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: 20px;
-  }
+
 
   .task-cards-container {
-    
     width: 100%; 
     display: flex;
     justify-content: space-around; 
     padding: 20px; 
     
 }
-
-
-.search-and-tags {
-    align-self: flex-start; 
-    margin-top: -20px;
-    margin-left: -20px; 
-  }
-  .add-task-btn {
-    /* Add styles for the button */
-  }
   
+.search-container {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 350px; 
+    left: 60%; 
+    transform: translateX(-50%); 
+}
+
+.tags-container {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 350px; 
+    left: 79%; 
+    transform: translateX(-50%); 
+}
+
+.add-task-button-container {
+    position: absolute;
+    top: 370px;
+    right: 10px;
+}
