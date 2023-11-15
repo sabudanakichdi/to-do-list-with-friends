@@ -1,6 +1,5 @@
-/* Navbar.css */
-.nav-item {
-    height: 100px; /* Set your desired height here */
-    line-height: 36px; /* Match the line height with the height for vertical alignment */
-  }
-  
+.notifications-dialog{
+  width: auto;
+  margin: auto;
+
+}

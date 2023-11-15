@@ -44,7 +44,6 @@ function TaskForm() {
 
   useEffect(() => {
     // Fetch data from the API endpoint
-    setTagInput("");
     axios
       .get(backendUrl + "/api/group") // Replace with your API endpoint
       .then((response) => {
@@ -214,6 +213,7 @@ function TaskForm() {
             onChange={(e) => setTagInput(e.target.value)}
             onKeyPress={(e) => {
               if (e.key === "Enter") {
+                e.preventDefault();
                 handleTagAdd();
               }
             }}
