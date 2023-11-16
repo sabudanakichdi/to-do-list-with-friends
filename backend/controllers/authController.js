@@ -71,7 +71,22 @@ const authController = {
       res.status(400).json({ message: error.message });
     }
   },
+  isAuth: async (req,res) => {
+    try {
+      // const { email, password } = req.body;
 
+      const ret = await authService.isAuth(req.body.token, req.body.email);
+      console.log(ret);
+      if (ret!==null) {
+        console.log(ret);
+        res.json(ret);
+      } else {
+        res.status(401).json({ message: 'Authentication failed' });
+      }
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  },
   inviteByMail: async (req,res) => {
     try {
       const users =await authService.invitebymail(res.body.email)

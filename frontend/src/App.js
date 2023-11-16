@@ -26,7 +26,39 @@ const theme = createTheme({
   },
 });
 
-export default class App extends React.Component {
+
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      user: null,
+    };
+  }
+  // const [user, setUser] = React.useState(null);
+  componentDidMount() {
+    this.checklogin();
+  }
+  checklogin = async () => {
+    const token = localStorage.getItem('authToken');
+    const userDetails = JSON.parse(localStorage.getItem('userDetails'));
+
+    if (token!==null && userDetails!==null && await AuthVerify()) {
+      // Token exists and is valid
+      console.log("this.state.user");
+      this.setState({
+        user: userDetails,
+      });
+      
+    } else {      
+      this.setState({
+        user: null,
+      });
+    }    
+    console.log(this.state.user);
+  };
+
   render() {
     return (
       <ThemeProvider theme={theme}>
@@ -49,3 +81,5 @@ export default class App extends React.Component {
     );
   }
 }
+export default App;
+
