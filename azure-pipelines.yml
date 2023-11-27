@@ -1,4 +1,5 @@
 # Docker
+
 # Build a Docker image
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
@@ -20,17 +21,33 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
-    - task: Docker@2
+    # - task: Docker@2
+    #   displayName: Build an image
+    #   inputs:
+    #     command: build
+    #     dockerfile: '$(Build.SourcesDirectory)/backend/Dockerfile'
+    #     tags: |
+    #       $(tag)
+    # - task: Docker@2
+    #   displayName: Build an image
+    #   inputs:
+    #     command: build
+    #     dockerfile: '$(Build.SourcesDirectory)/frontend/Dockerfile'
+    #     tags: |
+    #       $(tag)
+    - task: DockerCompose@0
       displayName: Build an image
       inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/backend/Dockerfile'
-        tags: |
-          $(tag)
-    - task: Docker@2
-      displayName: Build an image
+        containerregistrytype: 'Azure Container Registry'
+        azureSubscription: 'Azure subscription 1(3a35c19f-e098-4412-a1ce-a3fce7f26743)'
+        azureContainerRegistry: '{"loginServer":"wedolistapp.azurecr.io", "id" : "/subscriptions/3a35c19f-e098-4412-a1ce-a3fce7f26743/resourceGroups/wedolist/providers/Microsoft.ContainerRegistry/registries/wedolistapp"}'
+        dockerComposeFile: '**/docker-compose.yml'
+        action: 'Build services'
+    - task: DockerCompose@0
+      displayName: Push an image
       inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/frontend/Dockerfile'
-        tags: |
-          $(tag)
+        containerregistrytype: 'Azure Container Registry'
+        azureSubscription: 'Azure subscription 1(3a35c19f-e098-4412-a1ce-a3fce7f26743)'
+        azureContainerRegistry: '{"loginServer":"wedolistapp.azurecr.io", "id" : "/subscriptions/3a35c19f-e098-4412-a1ce-a3fce7f26743/resourceGroups/wedolist/providers/Microsoft.ContainerRegistry/registries/wedolistapp"}'
+        dockerComposeFile: '**/docker-compose.yml'
+        action: 'Build services'
