@@ -41,7 +41,7 @@ stages:
         containerregistrytype: 'Azure Container Registry'
         azureSubscription: 'Azure subscription 1(3a35c19f-e098-4412-a1ce-a3fce7f26743)'
         azureContainerRegistry: '{"loginServer":"wedolistapp.azurecr.io", "id" : "/subscriptions/3a35c19f-e098-4412-a1ce-a3fce7f26743/resourceGroups/wedolist/providers/Microsoft.ContainerRegistry/registries/wedolistapp"}'
-        dockerComposeFile: '**/docker-compose.yml'
+        dockerComposeFile: '$(Build.SourcesDirectory)/compose.yml'
         action: 'Build services'
     - task: DockerCompose@0
       displayName: Push an image
@@ -49,5 +49,5 @@ stages:
         containerregistrytype: 'Azure Container Registry'
         azureSubscription: 'Azure subscription 1(3a35c19f-e098-4412-a1ce-a3fce7f26743)'
         azureContainerRegistry: '{"loginServer":"wedolistapp.azurecr.io", "id" : "/subscriptions/3a35c19f-e098-4412-a1ce-a3fce7f26743/resourceGroups/wedolist/providers/Microsoft.ContainerRegistry/registries/wedolistapp"}'
-        dockerComposeFile: '**/docker-compose.yml'
+        dockerComposeFile: '$(Build.SourcesDirectory)/compose.yml'
         action: 'Build services'
