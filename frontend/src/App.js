@@ -9,8 +9,9 @@ import Resetpwd from "./pages/auth/Resetpwd";
 import { createTheme, ThemeProvider } from "@mui/material";
 import TaskForm from "./components/TaskForm/TaskForm";
 import Navbar from "./components/Navbar/Navbar";
-import GroupManagement from "./pages/groupManagement"
-
+import Dashboard from "./components/Dashboard/Dashboard";
+import GroupManagement from "./pages/groupManagement";
+import { AuthVerify } from "./context/AuthContext";
 const theme = createTheme({
   palette: {
     secondary: {
@@ -25,8 +26,6 @@ const theme = createTheme({
   },
 });
 
-
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -35,26 +34,25 @@ class App extends React.Component {
       user: null,
     };
   }
-  // const [user, setUser] = React.useState(null);
   componentDidMount() {
     this.checklogin();
+    console.log("Component mounted")
   }
   checklogin = async () => {
-    const token = localStorage.getItem('authToken');
-    const userDetails = JSON.parse(localStorage.getItem('userDetails'));
+    const token = localStorage.getItem("authToken");
+    const userDetails = JSON.parse(localStorage.getItem("userDetails"));
 
-    if (token!==null && userDetails!==null && await AuthVerify()) {
+    if (token !== null && userDetails !== null && (await AuthVerify())) {
       // Token exists and is valid
-      console.log("this.state.user");
+      console.log("this.state.user", this.state.user);
       this.setState({
         user: userDetails,
       });
-      
-    } else {      
+    } else {
       this.setState({
         user: null,
       });
-    }    
+    }
     console.log(this.state.user);
   };
 
@@ -64,11 +62,13 @@ class App extends React.Component {
         <Router>
           <Navbar />
           <Routes>
-            <Route path="/login" Component={Login} />
-            <Route path="/register" Component={Register} />
-            <Route path="/forgot" Component={Forgotpwd} />
-            <Route path="/reset" Component={Resetpwd} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/forgot" element={<Forgotpwd />} />
+            <Route path="/reset" element={<Resetpwd />} />
             <Route path="/task" element={<TaskForm />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="*" element={<Login />} /> 
             <Route path="/group" element={<GroupManagement />} />
           </Routes>
         </Router>
@@ -77,3 +77,4 @@ class App extends React.Component {
   }
 }
 export default App;
+
