@@ -1,5 +1,6 @@
 # Docker
 
+
 # Build a Docker image
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
@@ -51,3 +52,10 @@ stages:
         azureContainerRegistry: '{"loginServer":"wedolistapp.azurecr.io", "id" : "/subscriptions/3a35c19f-e098-4412-a1ce-a3fce7f26743/resourceGroups/wedolist/providers/Microsoft.ContainerRegistry/registries/wedolistapp"}'
         dockerComposeFile: '$(Build.SourcesDirectory)/compose.yaml'
         action: 'Build services'
+    - task: DockerCompose@0
+      inputs:
+        containerregistrytype: 'Azure Container Registry'
+        azureSubscription: 'Azure subscription 1(5)(3a35c19f-e098-4412-a1ce-a3fce7f26743)'
+        azureContainerRegistry: '{"loginServer":"wedolistapp.azurecr.io", "id" : "/subscriptions/3a35c19f-e098-4412-a1ce-a3fce7f26743/resourceGroups/wedolist/providers/Microsoft.ContainerRegistry/registries/wedolistapp"}'
+        dockerComposeFile: '$(Build.SourcesDirectory)/compose.yaml'
+        action: 'Run services'
