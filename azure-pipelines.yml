@@ -56,4 +56,6 @@ stages:
       inputs:
         appSourcePath: '$(Build.SourcesDirectory)/compose.yaml'
         azureSubscription: 'Azure subscription 1(1)(3a35c19f-e098-4412-a1ce-a3fce7f26743)'
+        acrName: 'wedolistapp'
         dockerfilePath: '$(Build.SourcesDirectory)/compose.yaml'
+        targetPort: '3000'
