@@ -52,7 +52,7 @@ stages:
         acrName: 'wedolistapp'
         imageToBuild: '$(Build.SourcesDirectory)/compose.yaml'
         imageToDeploy: 'wedolistapp.azurecr.io/sabudanakichditodolistwithfriends_frontend'
-        containerAppName: 'wedolist-frontend'
+        containerAppName: 'wedolist'
         resourceGroup: 'wedolist'
         containerAppEnvironment: 'managedEnvironment-wedolist-88c7'
         targetPort: '3000'
