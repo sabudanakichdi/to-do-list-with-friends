@@ -30,13 +30,8 @@ stages:
         azureContainerRegistry: '{"loginServer":"wedolistapp.azurecr.io", "id" : "/subscriptions/3a35c19f-e098-4412-a1ce-a3fce7f26743/resourceGroups/wedolist/providers/Microsoft.ContainerRegistry/registries/wedolistapp"}'
         dockerComposeFile: '$(Build.SourcesDirectory)/compose.yaml'
         action: 'Build services'
-  - job: ACR_Push
-    displayName: Push-to-ACR
-    pool:
-      vmImage: ubuntu-latest
-    steps:
     - task: DockerCompose@0
-      displayName: Push an image
+      displayName: Push an image to ACR
       inputs:
         containerregistrytype: 'Azure Container Registry'
         azureSubscription: 'Azure subscription 1(3a35c19f-e098-4412-a1ce-a3fce7f26743)'
