@@ -57,6 +57,11 @@ stages:
         containerAppEnvironment: 'managedEnvironment-wedolist-88c7'
         targetPort: '3000'
         location: 'West US 2'
+  - job: Deploy
+    displayName: Deploy-Backend
+    pool:
+      vmImage: ubuntu-latest
+    steps:
     - task: AzureContainerApps@1
       inputs:
         azureSubscription: 'Azure subscription 1(1)(3a35c19f-e098-4412-a1ce-a3fce7f26743)'
