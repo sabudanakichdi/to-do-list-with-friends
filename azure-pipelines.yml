@@ -30,6 +30,11 @@ stages:
         azureContainerRegistry: '{"loginServer":"wedolistapp.azurecr.io", "id" : "/subscriptions/3a35c19f-e098-4412-a1ce-a3fce7f26743/resourceGroups/wedolist/providers/Microsoft.ContainerRegistry/registries/wedolistapp"}'
         dockerComposeFile: '$(Build.SourcesDirectory)/compose.yaml'
         action: 'Build services'
+  - job: ACR_Push
+    displayName: Push-to-ACR
+    pool:
+      vmImage: ubuntu-latest
+    steps:
     - task: DockerCompose@0
       displayName: Push an image
       inputs:
@@ -41,7 +46,7 @@ stages:
 - stage: Deploy
   displayName: Deploy image
   jobs:
-  - job: Deploy
+  - job: Deploy-Frontend
     displayName: Deploy-Frontend
     pool:
       vmImage: ubuntu-latest
@@ -57,7 +62,7 @@ stages:
         containerAppEnvironment: 'managedEnvironment-wedolist-88c7'
         targetPort: '3000'
         location: 'West US 2'
-  - job: Deploy
+  - job: Deploy-Backend
     displayName: Deploy-Backend
     pool:
       vmImage: ubuntu-latest
