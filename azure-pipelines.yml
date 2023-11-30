@@ -37,13 +37,21 @@ stages:
         azureSubscription: 'Azure subscription 1(3a35c19f-e098-4412-a1ce-a3fce7f26743)'
         azureContainerRegistry: '{"loginServer":"wedolistapp.azurecr.io", "id" : "/subscriptions/3a35c19f-e098-4412-a1ce-a3fce7f26743/resourceGroups/wedolist/providers/Microsoft.ContainerRegistry/registries/wedolistapp"}'
         dockerComposeFile: '$(Build.SourcesDirectory)/compose.yaml'
-        action: 'Build services'
+        action: 'Push services'
+- stage: Deploy
+  displayName: Deploy image
+  jobs:
+  - job: Deploy
+    displayName: Deploy
+    pool:
+      vmImage: ubuntu-latest
+    steps:
     - task: AzureContainerApps@1
       inputs:
         azureSubscription: 'Azure subscription 1(1)(3a35c19f-e098-4412-a1ce-a3fce7f26743)'
         acrName: 'wedolistapp'
         imageToBuild: '$(Build.SourcesDirectory)/compose.yaml'
-        imageToDeploy: 'wedolistapp.azurecr.io/sabudanakichditodolistwithfriends_frontend'
+        # imageToDeploy: 'wedolistapp.azurecr.io/sabudanakichditodolistwithfriends_frontend'
         containerAppName: 'wedolist'
         resourceGroup: 'wedolist'
         containerAppEnvironment: 'managedEnvironment-wedolist-88c7'
