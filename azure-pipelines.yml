@@ -46,7 +46,7 @@ stages:
 - stage: Deploy
   displayName: Deploy image
   jobs:
-  - job: Deploy-Frontend
+  - job: Deploy_Frontend
     displayName: Deploy-Frontend
     pool:
       vmImage: ubuntu-latest
@@ -62,7 +62,7 @@ stages:
         containerAppEnvironment: 'managedEnvironment-wedolist-88c7'
         targetPort: '3000'
         location: 'West US 2'
-  - job: Deploy-Backend
+  - job: Deploy_Backend
     displayName: Deploy-Backend
     pool:
       vmImage: ubuntu-latest
