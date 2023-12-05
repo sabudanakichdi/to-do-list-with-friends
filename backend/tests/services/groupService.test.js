@@ -57,10 +57,11 @@ describe("groupService", () => {
       const updatedGroup = await groupService.updateGroup(groupId, validUpdates);
       expect(updatedGroup).toEqual(validUpdates);
     });
-
+    //Needs to be modified
     it("should return false if invalid updates are provided", async () => {
       Group.findByIdAndUpdate.mockResolvedValueOnce(invalidUpdates);
-      const updatedGroup = await groupService.updateGroup(groupId, invalidUpdates);
+      await groupService.updateGroup(groupId, invalidUpdates);
+      // const updatedGroup = 
       expect(false).toEqual(false);
     });
   });

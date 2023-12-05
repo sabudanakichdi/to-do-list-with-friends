@@ -34,5 +34,14 @@ dashboardRouter.get('/done', (req, res) => {
     });
 });
 
+dashboardRouter.get('/:groupID/stats', (req, res) => {
+    
+        dashboardService.getGroupStatistics(req.params.groupID).then((result) => {
+            res.status(200).json(result);
+        }).catch((e) => {
+            res.status(400).json(e);
+        });
+});
+
 
 module.exports = dashboardRouter;

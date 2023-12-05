@@ -20,8 +20,7 @@ import {
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Link, useLocation } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import "../Navbar/Navbar.css"
-
+import "../Navbar/Navbar.css";
 
 const Navbar = () => {
   const location = useLocation();
@@ -62,7 +61,10 @@ const Navbar = () => {
           </Typography>
           <Box component="div" sx={{ display: "flex", gap: "9px" }}>
             <Typography variant="h6" className="nav-item">
-              <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
+              <Link
+                to="/dashboard"
+                style={{ color: "inherit", textDecoration: "none" }}
+              >
                 Home
               </Link>
             </Typography>
@@ -72,6 +74,14 @@ const Navbar = () => {
                 style={{ color: "inherit", textDecoration: "none" }}
               >
                 Task
+              </Link>
+            </Typography>
+            <Typography variant="h6" className="nav-item">
+              <Link
+                to="/group"
+                style={{ color: "inherit", textDecoration: "none" }}
+              >
+                Group
               </Link>
             </Typography>
             <IconButton color="inherit" onClick={handleNotificationDialogOpen}>

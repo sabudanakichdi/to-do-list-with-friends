@@ -25,7 +25,6 @@ const [selectedUser, setSelectedUser] = useState(null);
                 username: user.username,
               }));
           setOptions((prevOptions) => [...prevOptions, ...optionsArray]);
-          props.username(optionsArray);
         } else {
           console.error("No data received from the API.");
         }
@@ -45,6 +44,7 @@ const [selectedUser, setSelectedUser] = useState(null);
         value={selectedUser}
         onChange={(event, newValue) => {
           setSelectedUser(newValue);
+          props.username(newValue);
         }}
         renderInput={(params) => (
           <TextField {...params} label="Select an user" />

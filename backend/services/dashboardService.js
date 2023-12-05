@@ -28,6 +28,36 @@ const dashboardService = {
         if (taskArray)
           return taskArray;
         return null
+    },
+
+    async getGroupStatistics(groupName) {
+
+      try {
+        
+        const groupStatistics = await Task.aggregate([
+          { $match: { group: groupName } },
+          {
+            $group: {
+              _id: '$status',
+              count: { $sum: 1 },
+            },
+          },
+        ]);
+        console.log('groupStatistics', groupStatistics);
+    
+        const statisticsData = {
+          inProgress: groupStatistics.find(stat => stat._id === 'in-progress')?.count || 0,
+          toDo: groupStatistics.find(stat => stat._id === 'to-do')?.count || 0,
+          done: groupStatistics.find(stat => stat._id === 'done')?.count || 0,
+        
+        };
+
+        return statisticsData;
+      } catch (error) {
+        console.error('Error fetching statistics:', error);
+      }
+
+
     }
 
 };

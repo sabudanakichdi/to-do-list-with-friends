@@ -63,8 +63,11 @@ function TaskForm() {
 
   const handleAssinee = (user) => {
     setSelectedUser(user);
-    formData.assignee = user;
+    formData.assignee = user._id;
+    console.log("Task Form User", user);
   };
+
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevState) => ({
@@ -173,7 +176,7 @@ function TaskForm() {
               setSelectedGroup(newValue);
               setFormData((prevFormData) => ({
                 ...prevFormData,
-                group: newValue ? newValue.name : "", // Set to an empty string if newValue is null
+                group: newValue ? newValue._id : "", // Set to an empty string if newValue is null
               }));
             }}
             renderInput={(params) => (
