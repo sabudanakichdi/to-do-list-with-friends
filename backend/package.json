@@ -27,6 +27,7 @@
     "mongodb": "^3.0.7",
     "mongodb-memory-server": "^9.0.1",
     "mongoose": "^6.12.2",
+    "nodemailer": "^6.9.7",
     "simple-node-logger": "^18.12.23",
     "supertest": "^6.3.3",
     "validator": "^13.7.0"
