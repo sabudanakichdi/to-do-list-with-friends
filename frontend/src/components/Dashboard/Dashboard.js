@@ -6,8 +6,11 @@ import TaskCards from './TaskCards';
 import Search from './Search'; 
 import Tags from './Tags';  
 import AddTaskButton from './AddTaskButton'; 
+import {getLoggedinUser} from '../../context/AuthContext';
 
 function Dashboard() {
+  let loggedinuser = getLoggedinUser();
+  console.log("loggedinuser",loggedinuser);
   return (
     <div className="dashboard">
       <div className="dashboard-top">

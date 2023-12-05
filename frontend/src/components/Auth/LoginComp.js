@@ -13,7 +13,7 @@ function LoginComp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(email);
-const response = await axios.post(backendUrl+'/auth/login', {"email": email,"password": password});
+const response = await axios.post(backendUrl+'/api/auth/login', {"email": email,"password": password});
 console.log(email);
 console.log(response.data.token);
   // If the login is successful, store the user's authentication token in local storage

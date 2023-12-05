@@ -3,18 +3,20 @@ import React from 'react';
 import logo from '../../assets/logo.png'
 import LoginComp from '../../components/Auth/LoginComp'
 import { AuthVerify } from "../../context/AuthContext"
+import Cookies from 'js-cookie';
 
-async function Login() {  
+function Login() {  
   const checklogin = async () => {
-    const token = localStorage.getItem('authToken');
-    const userDetails = JSON.parse(localStorage.getItem('userDetails'));
+    const token = Cookies.get('authToken');
+    const userDetails = JSON.parse(Cookies.get('userDetails'));
 
     if (token!==null && userDetails!==null && await AuthVerify()) {
-      window.location.href = '/register';
+      // window.location.href = '/register';
+      window.location.href = '/dashboard';
     }   
-    console.log(this.state.user);
+    // console.log(this.state.user);
   };
-  await checklogin();
+  checklogin();
 
   return (
     <Box sx={{
@@ -40,10 +42,10 @@ async function Login() {
             justifyContent="center"  
             spacing={2} minWidth='50%'
             >       
-            <Grid item xs={24} sm={12} justifyContent="center" >
+            <Grid item xs={12} sm={12} justifyContent="center" >
                 <img src={logo} margin="none" alignself="center" />
             </Grid>     
-            <Grid item xs={24} sm={12} >        
+            <Grid item xs={12} sm={12} >        
                 <LoginComp/>
             </Grid>
         </Grid>                
