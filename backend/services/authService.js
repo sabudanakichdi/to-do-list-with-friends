@@ -73,6 +73,19 @@ class authService {
   //  console.log(email);
    sendmail(email,"Welcome to WeDoList","You have been invited to join WeDo List " + "http://localhost:3000/register");
   }
+  static async usersByGroup(groupName){
+
+    const users = await User.find({group: groupName});
+    
+    if(!users) throw "No users found";
+    return users;
+
+  }
+  static async users(){
+    const users = await User.find();
+    if(!users) throw "No users found";
+    return users;
+  }
 
   
   static async sendmail(email, sub='Welcome to WeDoList', msg='You have been invited by ')
