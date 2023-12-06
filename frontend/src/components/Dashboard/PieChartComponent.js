@@ -3,10 +3,18 @@ import { PieChart, Pie, Cell, Tooltip, Text } from "recharts";
 import axios from "axios";
 import config from "../../config.json";
 
+
 const backendUrl = config.backendUrl;
 
-function PieChartComponent({ title, group }) {
+function PieChartComponent({ type, group }) {
   const [groupStats, setGroupStats] = useState(null);
+  console.log("PIE TITLE", type);
+
+  const personalData = [
+    { name: 'In-Progress', value: 300, color: '#FED0EE' },
+    { name: 'To-Do', value: 400, color: '#DFAEFF' },
+    { name: 'Completed', value: 300, color: '#D0E8FF' },
+  ];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,12 +45,39 @@ function PieChartComponent({ title, group }) {
       name: status,
       value: count * 300,
       color:
-        status === "in-progress"
+        status === "inProgress"
           ? "#FED0EE"
-          : status === "to-do"
+          : status === "toDo"
           ? "#DFAEFF"
           : "#D0E8FF",
     }));
+  }
+  const renderPersonalLabel = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    index,
+  })=>{
+
+    const RADIAN = Math.PI / 180;
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+      <Text
+        x={x}
+        y={y}
+        fill="#555"
+        textAnchor="middle"
+        dominantBaseline="central"
+      >
+        {personalData[index].name}
+      </Text>
+
+    );
   }
 
   // Custom label function
@@ -74,8 +109,7 @@ function PieChartComponent({ title, group }) {
 
   return (
     <div className="pie-chart-component">
-      <h3>{title}</h3>
-      {groupStats ? (
+      {groupStats && type==="group" ? (
         <PieChart width={200} height={200}>
           <Pie
             dataKey="value"
@@ -93,7 +127,27 @@ function PieChartComponent({ title, group }) {
           </Pie>
           <Tooltip />
         </PieChart>
-      ) : (
+      ) : type==="personal" ? ((
+
+        <PieChart width={200} height={200}>
+          <Pie
+            dataKey="value"
+            isAnimationActive={false}
+            data={personalData}
+            cx={100}
+            cy={100}
+            outerRadius={95}
+            label={renderPersonalLabel}
+            labelLine={false}
+          >
+            {personalData.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={entry.color} />
+            ))}
+          </Pie>
+          <Tooltip />
+        </PieChart>
+
+      )):(
         <p>Loading...</p>
       )}
     </div>

@@ -106,67 +106,70 @@ export default function TaskCards() {
     const indexOfLastItem = page * ITEMS_PER_PAGE;
     const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
     const currentItems = groupName.map( (group) => group.slice(indexOfFirstItem, indexOfLastItem));
-    
-    useEffect(() => {
-      async function fetchUser() {
-        var token = Cookies.get("authToken");
-        var user = JSON.parse(Cookies.get("userDetails"));
-        const response = await axios.post(backendUrl + "/api/auth/isauth", {
-          token: token,
-          email: user.email,
+
+    async function fetchUser() {
+      var token = Cookies.get("authToken");
+      var user = JSON.parse(Cookies.get("userDetails"));
+      const response = await axios.post(backendUrl + "/api/auth/isauth", {
+        token: token,
+        email: user.email,
+      });
+      console.log("Dashboard response", response.data.userid);
+
+      setUserId(response.data.userid);
+    }
+    async function fetchGroups() {
+      await axios
+        .get(backendUrl + `/api/group/user/${userId}`)
+        .then((response) => {
+          const groupsMap = response.data.data;
+          console.log("Groups Map ===>", groupsMap);
+          setGroupName( groupsMap.map((group) => group.name));
+          const groupId = groupsMap.map((group) => group._id);
+          const optionsArray = Object.entries(groupId).map(
+            ([key, value]) => ({
+              _id: key,
+              name: value,
+            })
+          );
+          
+          if (optionsArray.length > 0) {
+            console.log("Options Array", optionsArray);
+            setOptions(optionsArray);
+            console.log("Options", options);
+          } else {
+            console.error("No data received from the API.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching groups:", error);
         });
-        console.log("Dashboard response", response.data.userid);
-  
-        setUserId(response.data.userid);
-      }
-      async function fetchGroups() {
-        await axios
-          .get(backendUrl + `/api/group/user/${userId}`)
-          .then((response) => {
-            const groupsMap = response.data.data;
-            console.log("Groups Map ===>", groupsMap);
-            setGroupName( groupsMap.map((group) => group.name));
-            const groupId = groupsMap.map((group) => group._id);
-            const optionsArray = Object.entries(groupId).map(
-              ([key, value]) => ({
-                _id: key,
-                name: value,
-              })
-            );
-            
-            if (optionsArray.length > 0) {
-              console.log("Options Array", optionsArray);
-              setOptions(optionsArray);
-              console.log("Options", options);
-            } else {
-              console.error("No data received from the API.");
-            }
-          })
-          .catch((error) => {
-            console.error("Error fetching groups:", error);
-          });
-      }
-      async function fetchStats() {
-        const groupNameArray = groupName.map((group) => group.name);
-        console.log("Group Name Array", groupNameArray);
-        await axios
-          .get(backendUrl + `/api/dashboard/${groupName}/stats`)
-          .then((response) => {
-            const stats = response.data;
-            console.log("Options_ID", groupName);
-            console.log("Stats ===>", stats);
-            setGroupStats(stats);
-          })
-          .catch((error) => {
-            console.error("Error fetching stats:", error);
-          });
-      }
+    }
+    async function fetchStats() {
+      const groupNameArray = groupName.map((group) => group.name);
+      console.log("Group Name Array", groupNameArray);
+       await axios
+        .get(backendUrl + `/api/dashboard/${groupName}/stats`)
+        .then((response) => {
+          const stats = response.data;
+          console.log("Options_ID", groupName);
+          console.log("Stats ===>", stats);
+          setGroupStats(stats);
+        })
+        .catch((error) => {
+          console.error("Error fetching stats:", error);
+        });
+    }
+    useEffect(() => {
+
   
       fetchUser();
       fetchGroups();
       fetchStats();
 
     } , [userId]);
+
+
 
 
     return (
@@ -197,12 +200,13 @@ export default function TaskCards() {
         <>
           <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'flex-start', padding: 2 }}>
             <Grid container spacing={2}>
-              {currentItems.map((group, index) => (
+              {groupName.map((group, index) => (
                 <Grid item xs={12} sm={6} md={3} key={index}>
                   <Card sx={{ minWidth: 275, margin: 1 }}>
+                    
                     <CardContent>
                       <Typography variant="h5" component="div">
-                        {groupName}
+                        {group}
                       </Typography>
                       <Stack direction="column" spacing={1} sx={{ my: 1.5 }}>
 

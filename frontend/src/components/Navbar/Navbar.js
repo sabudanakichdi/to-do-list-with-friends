@@ -22,6 +22,7 @@ import { Link, useLocation } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import "../Navbar/Navbar.css";
 import Cookies from 'js-cookie';
+import InviteForm from "../Navbar/inviteForm";
 
 
 const Navbar = () => {
@@ -83,6 +84,10 @@ const Navbar = () => {
                 Task
               </Link>
             </Typography>
+            <Typography variant="h6" className="nav-item">
+              <InviteForm />
+            </Typography>
+            
             <Typography variant="h6" className="nav-item">
               <Link
                 to="/group"
