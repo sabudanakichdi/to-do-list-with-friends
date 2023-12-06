@@ -19,8 +19,7 @@ function Dashboard() {
   const handleGroupChange = (group) => {
     console.log("Selected group Dashboard", group);
     setSelectedGroup(group);
-  };
-function Dashboard() {
+  }
   return (
     <div className="dashboard">
       <div className="dashboard-top">
