@@ -12,6 +12,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Dashboard from "./components/Dashboard/Dashboard";
 import GroupManagement from "./pages/groupManagement";
 import { AuthVerify } from "./context/AuthContext";
+import Cookies from 'js-cookie';
 const theme = createTheme({
   palette: {
     secondary: {
@@ -39,15 +40,16 @@ class App extends React.Component {
     console.log("Component mounted")
   }
   checklogin = async () => {
-    const token = localStorage.getItem("authToken");
-    const userDetails = JSON.parse(localStorage.getItem("userDetails"));
-
+    const token = Cookies.get("authToken");
+    const userDetails = JSON.parse(Cookies.get("userDetails"));
+    console.log("token", token);
     if (token !== null && userDetails !== null && (await AuthVerify())) {
       // Token exists and is valid
       console.log("this.state.user", this.state.user);
       this.setState({
         user: userDetails,
       });
+      // return (<Dashboard/>)
     } else {
       this.setState({
         user: null,

@@ -29,10 +29,10 @@ function Register() {
         justifyContent="center"  
         spacing={2} minWidth='50%'
         >       
-        <Grid item xs={24} sm={12} justifyContent="center" >
+        <Grid item xs={12} sm={12} justifyContent="center" >
             <img src={logo} margin="none" alignself="center" />
         </Grid>     
-        <Grid item xs={24} sm={12} >        
+        <Grid item xs={12} sm={12} >        
             <RegisterComp/>
         </Grid>
     </Grid>                

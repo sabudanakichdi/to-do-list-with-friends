@@ -3,16 +3,20 @@ import "./Dashboard.css";
 import PieChartComponent from "./PieChartComponent";
 import SelectTextFields from "./SelectTextFields";
 import TaskCards from "./TaskCards";
+import {getLoggedinUser} from '../../context/AuthContext';
 import AddTaskButton from "./AddTaskButton";
 
 function Dashboard() {
-
+  let loggedinuser = getLoggedinUser();
+  console.log("loggedinuser",loggedinuser);
   const [selectedGroup, setSelectedGroup] = useState(''); // [selectedGroup, setSelectedGroup
   const handleGroupChange = (group) => {
     console.log("Selected group Dashboard", group);
     setSelectedGroup(group);
   };
 
+
+function Dashboard() {
   return (
     <div className="dashboard">
       <div className="dashboard-top">
