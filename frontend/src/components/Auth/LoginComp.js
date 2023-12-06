@@ -13,34 +13,32 @@ function LoginComp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(email);
-    const response = await axios.post(backendUrl + "/api/auth/login", {
-      email: email,
-      password: password,
-    });
-    console.log(email);
-    console.log(response.data.token);
-    // If the login is successful, store the user's authentication token in local storage
-    if (response.status === 200) {
-      const token = await response.data.token;
-      Cookies.set("authToken", token.token);
-      Cookies.set("userDetails", JSON.stringify(response.data.token.user));
-      window.location.href = "/dashboard";
-    } else {
-      // TODO: Display an error message to the user
-      alert("Invalid email or password");
-    }
-  };
 
-  const handleRegister = async (e) => {
-    e.preventDefault();
-    window.location.href = "/register";
-  };
+const response = await axios.post(backendUrl+'/api/auth/login', {"email": email,"password": password});
+console.log(email);
+console.log(response.data.token);
+  // If the login is successful, store the user's authentication token in local storage
+  if (response.status === 200) {
+    const token = await response.data.token;
+    Cookies.set('authToken', token.token);
+    Cookies.set('userDetails', JSON.stringify(response.data.token.user));
+    window.location.href = '/';
+  } else {
+    // TODO: Display an error message to the user
+    alert('Invalid email or password');
+  }   
+};
 
-  const handleForgetPassword = async (e) => {
-    e.preventDefault();
-    window.location.href = "/forgot";
-  };
+const handleRegister = async (e) => {
+  e.preventDefault();
+  window.location.href = '/register';
+};
 
+const handleForgetPassword = async (e) => {
+  e.preventDefault();
+  window.location.href = '/forgot';
+
+};
   return (
     <Grid
       container

@@ -1,10 +1,10 @@
-import React,{useEffect, useState} from 'react';
-import './Dashboard.css';
-import PieChartComponent from './PieChartComponent';
-import SelectTextFields from './SelectTextFields';
-import TaskCards from './TaskCards';
-import AddTaskButton from './AddTaskButton'; 
+import React,{useState} from "react";
+import "./Dashboard.css";
+import PieChartComponent from "./PieChartComponent";
+import SelectTextFields from "./SelectTextFields";
+import TaskCards from "./TaskCards";
 import {getLoggedinUser} from '../../context/AuthContext';
+import AddTaskButton from "./AddTaskButton";
 
 
 
@@ -13,16 +13,14 @@ import {getLoggedinUser} from '../../context/AuthContext';
 function Dashboard() {
   let loggedinuser = getLoggedinUser();
   console.log("loggedinuser",loggedinuser);
-
-
   const [selectedGroup, setSelectedGroup] = useState('');
+
 
   const handleGroupChange = (group) => {
     console.log("Selected group Dashboard", group);
     setSelectedGroup(group);
   };
-
-
+function Dashboard() {
   return (
     <div className="dashboard">
       <div className="dashboard-top">
@@ -37,6 +35,7 @@ function Dashboard() {
       <div className="pie-charts">
         <PieChartComponent type="group" group={selectedGroup}/>
         <PieChartComponent type="personal" group={selectedGroup}/>
+
       </div>
 
       <div className="task-cards-container">
