@@ -5,7 +5,7 @@ module.exports = function(app) {
   app.use(
       '/api',
       createProxyMiddleware({
-        target: 'https://wedolist-backend.gentledune-a5a44295.westus2.azurecontainerapps.io',
+        target: 'https://wedolist-backend.gentledune-a5a44295.westus2.azurecontainerapps.io:3000',
         changeOrigin: true,
       })
     );
