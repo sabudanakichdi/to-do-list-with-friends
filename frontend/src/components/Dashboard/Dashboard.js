@@ -36,7 +36,7 @@ function Dashboard() {
       </div>
       <div className="pie-charts">
         <PieChartComponent type="group" group={selectedGroup}/>
-        <PieChartComponent type="personal"/>
+        <PieChartComponent type="personal" />
       </div>
 
       <div className="task-cards-container">
