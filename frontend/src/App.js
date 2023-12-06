@@ -58,7 +58,9 @@ class App extends React.Component {
      }
      console.log(this.state.user);
    }else{
-      console.log("No user logged in")
+    await
+    console.log("No user logged in")
+    //window.location.href = '/';
    }
 
   };

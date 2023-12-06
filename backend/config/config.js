@@ -1,6 +1,6 @@
-const env = process.env.NODE_ENV || "local";
+const env = process.env.NODE_ENV || "development";
 
-if (env === "development" || env === "test" || env === "local") {
+if (env === "development" || env === "test") {
   const config = require("./config.json");
   const envConfig = config[env];
   console.log(envConfig);

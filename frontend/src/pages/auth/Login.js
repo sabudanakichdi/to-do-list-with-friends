@@ -19,7 +19,7 @@ function Login() {
     }else{
       await
       console.log("No user logged in")
-      window.location.href = '/';
+     // window.location.href = '/';
     }
     
     // console.log(this.state.user);
