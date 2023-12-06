@@ -19,8 +19,7 @@ function Dashboard() {
   const handleGroupChange = (group) => {
     console.log("Selected group Dashboard", group);
     setSelectedGroup(group);
-  };
-function Dashboard() {
+  }
   return (
     <div className="dashboard">
       <div className="dashboard-top">
@@ -34,7 +33,7 @@ function Dashboard() {
       </div>
       <div className="pie-charts">
         <PieChartComponent type="group" group={selectedGroup}/>
-        <PieChartComponent type="personal"/>
+        <PieChartComponent type="personal" />
       </div>
 
       <div className="task-cards-container">
