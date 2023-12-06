@@ -23,6 +23,7 @@ const groupService = {
         return {
           _id: newGroup._id,
           name: newGroup.name,
+          users: newGroup.users,
       };
     },
 
@@ -51,6 +52,15 @@ const groupService = {
             return true;
         }catch(e){return false}
       },
+
+      async getGroupsByUser(userId){
+        const userGroups = await Group.find({ users: userId }); 
+
+        const groupsMap=  userGroups.map((group) => group.toObject());
+        const groupNames = groupsMap.map((group) => group.name);
+
+        return groupsMap;
+      }
 };
 
 module.exports =  groupService 

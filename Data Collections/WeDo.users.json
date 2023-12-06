@@ -1,0 +1,183 @@
+[{
+  "_id": {
+    "$oid": "654ae845a04f6878646eef47"
+  },
+  "username": "test",
+  "email": "test@gmail.com",
+  "password": "$2b$10$UVyy73gT408bRMHMB9SbA.Jn18DaZWdlgi6LRSIfprjBG6AqyV.CG",
+  "first_name": "test",
+  "last_name": "test",
+  "createdAt": {
+    "$date": "2023-11-08T01:45:41.835Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654ae913759361d6cd7b89f4"
+  },
+  "username": "pranay",
+  "email": "pjuturu@gmail.com",
+  "password": "$2b$10$ATpgwOBfahidgAxJoYC1VOMhIxoMUmKWagRcwHZhEnSwQ.DsUdMwO",
+  "first_name": "pranay",
+  "last_name": "juturu",
+  "createdAt": {
+    "$date": "2023-11-08T01:49:07.435Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654af0c63790f9f9f799f599"
+  },
+  "username": "test2",
+  "email": "testing@gmail.com",
+  "password": "$2b$10$ciRlHYG1jS/XCT1cHWwpruXj6gSP2twPzRG97SpcLQvfYzdmNf6WC",
+  "first_name": "test2",
+  "last_name": "test2",
+  "groups": [],
+  "createdAt": {
+    "$date": "2023-11-08T02:21:58.330Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654af331a63973063739ac7e"
+  },
+  "username": "test3",
+  "email": "testing@gmail.com",
+  "password": "$2b$10$fsyXaiPEnUiOEjIGeavBh.79QSWh2xBG37gP/K28U7cFnSHSKNy0G",
+  "first_name": "test3",
+  "last_name": "test3",
+  "groups": [],
+  "createdAt": {
+    "$date": "2023-11-08T02:32:17.012Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654af3685c06c3d91f4cb768"
+  },
+  "username": "4",
+  "email": "testing@gmail.com",
+  "password": "$2b$10$2YBdZY656KaXBq7eNAR7iuF6w5Tk2c7yr3iUKvSmkS5jkO0R.57Fu",
+  "first_name": "test4",
+  "last_name": "test4",
+  "groups": [
+    "test",
+    "personal"
+  ],
+  "createdAt": {
+    "$date": "2023-11-08T02:33:12.270Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "655556c2fe5f272c23ffa83e"
+  },
+  "username": "test",
+  "email": "pranayreddy38@gmail.com",
+  "password": "$2b$10$BHtZEmrY6/vl4f91Vztgfu0sQrNSojFSB/vm1zQOrecZhJKZeapja",
+  "first_name": "test",
+  "last_name": "test",
+  "groups": [],
+  "createdAt": {
+    "$date": "2023-11-15T23:39:46.210Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "655558e8fe5f272c23ffa842"
+  },
+  "username": "Pranay Reddy",
+  "email": "pranay.rjuturu@gmail.com",
+  "password": "$2b$10$xOitp53zedfQ5aHdfiTGROn9ZLuoOY1fo5XL9Rx3filDut3M5Yw06",
+  "first_name": "Pranay",
+  "last_name": "Reddy",
+  "groups": [],
+  "createdAt": {
+    "$date": "2023-11-15T23:48:56.332Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656fb75d6ad40ab307aeffe0"
+  },
+  "username": "test",
+  "email": "testing@gmail.com",
+  "password": "$2b$10$MDqTwAHdnz9cRTX2XnexUeHc2CRItiqJHUbud7ChKCf6.BA4rrZAy",
+  "first_name": "test",
+  "last_name": "test",
+  "groups": [],
+  "createdAt": {
+    "$date": "2023-12-05T23:50:53.892Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656fb7b6c37be391cbc2df85"
+  },
+  "username": "Jack",
+  "email": "jack@gmail.com",
+  "password": "$2b$10$Om5i0l..MHB.E5wIGgKsKe4Y4ItA/AfM/GVb9.Mipkn7PRDw2ZM4O",
+  "first_name": "jack",
+  "last_name": "demo",
+  "groups": [],
+  "createdAt": {
+    "$date": "2023-12-05T23:52:22.934Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656fb7d5c37be391cbc2df88"
+  },
+  "username": "Jack",
+  "email": "jack@gmail.com",
+  "password": "$2b$10$M4ZB9.E7tbJbZ04O1NnmIuHO4gzo5N0mFOb0JDBvuHp4ihWfh/h2a",
+  "first_name": "jack",
+  "last_name": "demo",
+  "groups": [],
+  "createdAt": {
+    "$date": "2023-12-05T23:52:53.723Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656fb82256c7349f0443f4e1"
+  },
+  "username": "Jack",
+  "email": "jack@gmail.com",
+  "password": "$2b$10$bJB4IUjOTX9FZ4zaA7KucunB9rjWIgRrrxH7VneRs3GBpJCLonH7a",
+  "first_name": "jack",
+  "last_name": "demo",
+  "groups": [],
+  "createdAt": {
+    "$date": "2023-12-05T23:54:10.440Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656fb85056c7349f0443f4e4"
+  },
+  "username": "John",
+  "email": "john@gmail.com",
+  "password": "$2b$10$O37h7kjGluQKDdOJ/JmaCOASE4GFZBIojyZbanSmE3judBaT8Dpse",
+  "first_name": "john",
+  "last_name": "demo",
+  "groups": [
+    "demo"
+  ],
+  "createdAt": {
+    "$date": "2023-12-05T23:54:56.076Z"
+  },
+  "__v": 0
+}]

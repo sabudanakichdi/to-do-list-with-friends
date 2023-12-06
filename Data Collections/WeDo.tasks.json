@@ -1,0 +1,708 @@
+[{
+  "_id": {
+    "$oid": "653c19d0ec795989ec3538a7"
+  },
+  "title": "Pick up",
+  "group": "household",
+  "tags": [
+    "gift"
+  ],
+  "description": "Pick up flower for mom from flower shop at Baker street",
+  "priority": "LOW",
+  "status": "TODO",
+  "assignedTo": "Jane",
+  "deadLine": {
+    "$date": "2023-08-26T04:00:00.000Z"
+  },
+  "startDate": {
+    "$date": "2023-08-26T04:00:00.000Z"
+  },
+  "createdBy": "John",
+  "createdOn": {
+    "$date": "2023-08-24T04:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6541488fd1a9a12868a694e3"
+  },
+  "title": "Hello",
+  "tags": [],
+  "description": "asdfgag",
+  "priority": "LOW",
+  "status": "done",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654180860b655e7dcf902975"
+  },
+  "title": "Pick up",
+  "tags": [],
+  "description": "asdfgag",
+  "priority": "LOW",
+  "status": "done",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6541822ba51568d1f60bc9a1"
+  },
+  "title": "Hello",
+  "tags": [],
+  "description": "asdfgag",
+  "priority": "LOW",
+  "status": "done",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6542dfc32cb16a69712c2bda"
+  },
+  "title": "Test",
+  "group": "",
+  "tags": [
+    "asdf"
+  ],
+  "description": "asdf",
+  "priority": "medium",
+  "status": "to-do",
+  "startDate": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6548223bc601e178a2d0aeb2"
+  },
+  "title": "kugti",
+  "group": "",
+  "tags": [
+    "asdf"
+  ],
+  "description": "iuh",
+  "priority": "low",
+  "status": "in-progress",
+  "startDate": {
+    "$date": "2023-10-31T00:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65484b16f8d86d9f0d115db0"
+  },
+  "title": "StatusTest",
+  "group": "",
+  "tags": [
+    ""
+  ],
+  "description": "asdf",
+  "priority": "low",
+  "status": "in-progress",
+  "startDate": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654931ff8911167052a2de94"
+  },
+  "title": "adfasfasdf",
+  "group": "",
+  "tags": [
+    "asdf,asdf"
+  ],
+  "description": "SDG",
+  "priority": "low",
+  "status": "to-do",
+  "startDate": {
+    "$date": "2023-11-15T00:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65497424160bec0b3b933134"
+  },
+  "title": "Test Group",
+  "group": "",
+  "tags": [
+    "acfa"
+  ],
+  "description": "awertsdf",
+  "priority": "low",
+  "status": "to-do",
+  "startDate": {
+    "$date": "2023-11-06T00:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654974cb160bec0b3b933136"
+  },
+  "title": "Test Group1",
+  "group": "",
+  "tags": [
+    "acfa"
+  ],
+  "description": "awertsdf",
+  "priority": "low",
+  "status": "to-do",
+  "startDate": {
+    "$date": "2023-11-06T00:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6549759e160bec0b3b933138"
+  },
+  "title": "Test Group2",
+  "group": "",
+  "tags": [
+    "acfa"
+  ],
+  "description": "awertsdf",
+  "priority": "low",
+  "status": "to-do",
+  "startDate": {
+    "$date": "2023-11-06T00:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654978c3160bec0b3b93313e"
+  },
+  "title": "Test Group 3",
+  "group": "",
+  "tags": [
+    "asdf"
+  ],
+  "description": "w4",
+  "priority": "low",
+  "status": "in-progress",
+  "startDate": {
+    "$date": "2023-11-06T00:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654979a742f5feff5f889d7b"
+  },
+  "title": "Test Group 4",
+  "group": "",
+  "tags": [
+    "asdf"
+  ],
+  "description": "w4",
+  "priority": "low",
+  "status": "in-progress",
+  "startDate": {
+    "$date": "2023-11-06T00:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654979c8d7c4cec030c04abd"
+  },
+  "title": "Test Group 5",
+  "group": "",
+  "tags": [
+    "asdf"
+  ],
+  "description": "w4",
+  "priority": "low",
+  "status": "in-progress",
+  "endDate": {
+    "$date": "2023-11-10T00:00:00.000Z"
+  },
+  "startDate": {
+    "$date": "2023-11-06T00:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65497bf0d7c4cec030c04ac2"
+  },
+  "title": "Test Group 5",
+  "group": null,
+  "tags": [
+    "sadf"
+  ],
+  "description": "sdf",
+  "priority": "low",
+  "status": "in-progress",
+  "endDate": {
+    "$date": "2023-11-17T00:00:00.000Z"
+  },
+  "startDate": {
+    "$date": "2023-11-06T00:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65497d4cd7c4cec030c04ad5"
+  },
+  "title": "Test 23",
+  "group": "",
+  "tags": [
+    "sadf"
+  ],
+  "description": "sadf",
+  "priority": "medium",
+  "status": "in-progress",
+  "endDate": null,
+  "startDate": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65497dafd7c4cec030c04ad8"
+  },
+  "title": "Test 232",
+  "group": "",
+  "tags": [
+    "sadf"
+  ],
+  "description": "sadf",
+  "priority": "medium",
+  "status": "in-progress",
+  "endDate": null,
+  "startDate": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65497f0ed7c4cec030c04ae0"
+  },
+  "title": "Test Groups",
+  "group": "",
+  "tags": [
+    "sadf"
+  ],
+  "description": "sadf",
+  "priority": "medium",
+  "status": "in-progress",
+  "endDate": null,
+  "startDate": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65497f2bd7c4cec030c04ae2"
+  },
+  "title": "Test Groups 2",
+  "group": "",
+  "tags": [
+    "sadf"
+  ],
+  "description": "sadf",
+  "priority": "medium",
+  "status": "in-progress",
+  "endDate": null,
+  "startDate": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65497ff1d7c4cec030c04ae7"
+  },
+  "title": "TestGroups",
+  "group": null,
+  "tags": [
+    "wqer"
+  ],
+  "description": "qwer",
+  "priority": "low",
+  "status": "to-do",
+  "endDate": null,
+  "startDate": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6549818dd7c4cec030c04aef"
+  },
+  "title": "test groups 1234",
+  "group": null,
+  "tags": [
+    "adf"
+  ],
+  "description": "asdA",
+  "priority": "low",
+  "status": "to-do",
+  "endDate": null,
+  "startDate": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6549824fd7c4cec030c04af3"
+  },
+  "title": "1234Test Group123",
+  "group": "",
+  "tags": [
+    "asdf"
+  ],
+  "description": "asdf",
+  "priority": "medium",
+  "status": "to-do",
+  "endDate": null,
+  "startDate": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65498326d7c4cec030c04af7"
+  },
+  "title": "TestGroup23",
+  "group": "",
+  "tags": [
+    "asdf"
+  ],
+  "description": "asdf",
+  "priority": "low",
+  "status": "in-progress",
+  "endDate": null,
+  "startDate": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65498359d7c4cec030c04afb"
+  },
+  "title": "TestGroup211",
+  "group": null,
+  "tags": [
+    "sa"
+  ],
+  "description": "asdf",
+  "priority": "low",
+  "status": "to-do",
+  "endDate": null,
+  "startDate": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654983b8d7c4cec030c04aff"
+  },
+  "title": "TestGroup4546",
+  "group": "test name",
+  "tags": [
+    "asdf"
+  ],
+  "description": "asdf",
+  "priority": "low",
+  "status": "to-do",
+  "endDate": null,
+  "startDate": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654afa428046c02ad629762e"
+  },
+  "title": "test full",
+  "group": "test",
+  "tags": [
+    "",
+    "asdf",
+    "asdfxfs"
+  ],
+  "description": "asdfxfawe",
+  "priority": "low",
+  "status": "to-do",
+  "endDate": {
+    "$date": "2023-11-08T00:00:00.000Z"
+  },
+  "startDate": {
+    "$date": "2023-11-15T00:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656e78d5d90970d918b218da"
+  },
+  "title": "Testing g stats",
+  "group": "home",
+  "tags": [],
+  "description": "as",
+  "priority": "LOW",
+  "status": "done",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656e7fdd38b2d4929653509f"
+  },
+  "title": "asdf",
+  "group": "test",
+  "tags": [],
+  "description": "asfgas",
+  "priority": "medium",
+  "status": "in-progress",
+  "endDate": {
+    "$date": "2023-12-15T00:00:00.000Z"
+  },
+  "startDate": {
+    "$date": "2023-12-04T00:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656e800238b2d492965350a1"
+  },
+  "title": "asdf",
+  "group": "test",
+  "tags": [],
+  "description": "asfgas",
+  "priority": "medium",
+  "status": "in-progress",
+  "endDate": {
+    "$date": "2023-12-15T00:00:00.000Z"
+  },
+  "startDate": {
+    "$date": "2023-12-04T00:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656e801f38b2d492965350a3"
+  },
+  "title": "asdf",
+  "group": "test",
+  "tags": [],
+  "description": "asfgas",
+  "priority": "medium",
+  "status": "in-progress",
+  "endDate": {
+    "$date": "2023-12-15T00:00:00.000Z"
+  },
+  "startDate": {
+    "$date": "2023-12-04T00:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656e80cb38b2d492965350a6"
+  },
+  "title": "asdf",
+  "group": "test",
+  "tags": [],
+  "description": "asfgas",
+  "priority": "medium",
+  "status": "in-progress",
+  "endDate": {
+    "$date": "2023-12-15T00:00:00.000Z"
+  },
+  "startDate": {
+    "$date": "2023-12-04T00:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656e80e238b2d492965350a9"
+  },
+  "title": "asdf",
+  "group": "test",
+  "tags": [],
+  "description": "asfgas",
+  "priority": "medium",
+  "status": "in-progress",
+  "endDate": {
+    "$date": "2023-12-15T00:00:00.000Z"
+  },
+  "startDate": {
+    "$date": "2023-12-04T00:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656e81c938b2d492965350b4"
+  },
+  "title": "asdgf",
+  "group": "test",
+  "tags": [
+    ""
+  ],
+  "description": "asdf",
+  "priority": "medium",
+  "status": "in-progress",
+  "endDate": {
+    "$date": "2023-12-15T00:00:00.000Z"
+  },
+  "startDate": {
+    "$date": "2023-12-04T00:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656e81eb38b2d492965350b6"
+  },
+  "title": "asdgf",
+  "group": "test",
+  "tags": [
+    ""
+  ],
+  "description": "asdf",
+  "priority": "medium",
+  "status": "in-progress",
+  "endDate": {
+    "$date": "2023-12-15T00:00:00.000Z"
+  },
+  "startDate": {
+    "$date": "2023-12-04T00:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656e829338b2d492965350bc"
+  },
+  "title": "asdgf",
+  "group": "test",
+  "tags": [
+    ""
+  ],
+  "description": "asdf",
+  "priority": "medium",
+  "status": "in-progress",
+  "endDate": {
+    "$date": "2023-12-15T00:00:00.000Z"
+  },
+  "startDate": {
+    "$date": "2023-12-04T00:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656e830338b2d492965350c0"
+  },
+  "title": "asdgf",
+  "group": "test",
+  "tags": [
+    ""
+  ],
+  "description": "asdf",
+  "priority": "medium",
+  "status": "in-progress",
+  "endDate": {
+    "$date": "2023-12-15T00:00:00.000Z"
+  },
+  "startDate": {
+    "$date": "2023-12-04T00:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656e840038b2d492965350c4"
+  },
+  "title": "asdgf",
+  "group": "654af6c98046c02ad629761d",
+  "tags": [
+    ""
+  ],
+  "description": "asdf",
+  "priority": "medium",
+  "status": "in-progress",
+  "endDate": {
+    "$date": "2023-12-15T00:00:00.000Z"
+  },
+  "startDate": {
+    "$date": "2023-12-04T00:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656fb90856c7349f0443f4e7"
+  },
+  "title": "Testing g stats",
+  "group": "demo",
+  "tags": [],
+  "description": "as",
+  "priority": "LOW",
+  "status": "done",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656fb92356c7349f0443f4e9"
+  },
+  "title": "stats",
+  "group": "demo",
+  "tags": [],
+  "description": "statistics",
+  "priority": "HIGh",
+  "status": "to-do",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656fb9a656c7349f0443f4ed"
+  },
+  "title": "Demo",
+  "group": "demo",
+  "tags": [],
+  "description": "statistics",
+  "priority": "HIGH",
+  "status": "to-do",
+  "assignedTo": "656fb85056c7349f0443f4e4",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656fba0d56c7349f0443f4f4"
+  },
+  "title": "Frontend",
+  "group": "656fb7546ad40ab307aeffdd",
+  "tags": [
+    ""
+  ],
+  "description": "Testing from frontend",
+  "priority": "low",
+  "status": "to-do",
+  "endDate": {
+    "$date": "2023-12-30T00:00:00.000Z"
+  },
+  "startDate": {
+    "$date": "2023-12-12T00:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6570b2ce9cbadf6823ebf78e"
+  },
+  "title": "presentation",
+  "group": "656fbdddc04cf5922d0534c7",
+  "tags": [
+    ""
+  ],
+  "description": "Make a presentation for final demonstration",
+  "priority": "high",
+  "status": "to-do",
+  "endDate": {
+    "$date": "2023-12-07T00:00:00.000Z"
+  },
+  "startDate": {
+    "$date": "2023-12-06T00:00:00.000Z"
+  },
+  "__v": 0
+}]

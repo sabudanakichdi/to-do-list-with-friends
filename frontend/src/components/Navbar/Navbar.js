@@ -21,6 +21,9 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Link, useLocation } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import "../Navbar/Navbar.css";
+import Cookies from 'js-cookie';
+
+
 
 const Navbar = () => {
   const location = useLocation();
@@ -43,6 +46,11 @@ const Navbar = () => {
   };
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+  };
+  const handleLogout = () => {
+    Cookies.remove("authToken");
+    Cookies.remove("userDetails");
+    setAnchorEl(null);
   };
 
   const handleClose = () => {
@@ -123,7 +131,7 @@ const Navbar = () => {
               <MenuItem component={Link} to="/task" onClick={handleClose}>
                 My Account
               </MenuItem>
-              <MenuItem component={Link} to="/login" onClick={handleClose}>
+              <MenuItem component={Link} to="/" onClick={handleLogout}>
                 Logout
               </MenuItem>
             </Menu>

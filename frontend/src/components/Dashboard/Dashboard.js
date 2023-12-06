@@ -6,16 +6,20 @@ import TaskCards from "./TaskCards";
 import {getLoggedinUser} from '../../context/AuthContext';
 import AddTaskButton from "./AddTaskButton";
 
+
+
+
+
 function Dashboard() {
   let loggedinuser = getLoggedinUser();
   console.log("loggedinuser",loggedinuser);
-  const [selectedGroup, setSelectedGroup] = useState(''); // [selectedGroup, setSelectedGroup
+  const [selectedGroup, setSelectedGroup] = useState('');
+
+
   const handleGroupChange = (group) => {
     console.log("Selected group Dashboard", group);
     setSelectedGroup(group);
   };
-
-
 function Dashboard() {
   return (
     <div className="dashboard">
@@ -30,7 +34,8 @@ function Dashboard() {
       </div>
       <div className="pie-charts">
         <PieChartComponent type="group" group={selectedGroup}/>
-        <PieChartComponent type="personal" />
+        <PieChartComponent type="personal" group={selectedGroup}/>
+
       </div>
 
       <div className="task-cards-container">

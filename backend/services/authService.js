@@ -17,7 +17,7 @@ class authService {
 
     const hashedPassword = await bcrypt.hash(body.password, 10);
 
-    const newuser = new User ({email: body.email, first_name:body.first_name, last_name:body.last_name,password:hashedPassword,username:body.username,contact:body.contact });    
+    const newuser = new User ({email: body.email, first_name:body.first_name, last_name:body.last_name,password:hashedPassword,username:body.username,contact:body.contact,groups:body.groups });    
     newuser.save();
     
     return {"status": "success", "user":newuser};

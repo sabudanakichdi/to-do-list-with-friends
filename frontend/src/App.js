@@ -40,22 +40,29 @@ class App extends React.Component {
     console.log("Component mounted")
   }
   checklogin = async () => {
-    const token = Cookies.get("authToken");
-    const userDetails = JSON.parse(Cookies.get("userDetails"));
-    console.log("token", token);
-    if (token !== null && userDetails !== null && (await AuthVerify())) {
-      // Token exists and is valid
-      console.log("this.state.user", this.state.user);
-      this.setState({
-        user: userDetails,
-      });
-      // return (<Dashboard/>)
-    } else {
-      this.setState({
-        user: null,
-      });
-    }
-    console.log(this.state.user);
+   if(Cookies.get('userDetails')!==undefined || Cookies.get('authToken')!==undefined){
+
+     const token = Cookies.get("authToken");
+     const userDetails = JSON.parse(Cookies.get("userDetails"));
+     console.log("token", token);
+     if (token !== null && userDetails !== null && (await AuthVerify())) {
+       // Token exists and is valid
+       console.log("this.state.user", this.state.user);
+       this.setState({
+         user: userDetails,
+       });
+     } else {
+       this.setState({
+         user: null,
+       });
+     }
+     console.log(this.state.user);
+   }else{
+    await
+    console.log("No user logged in")
+    //window.location.href = '/';
+   }
+
   };
 
   render() {

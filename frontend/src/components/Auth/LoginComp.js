@@ -13,6 +13,7 @@ function LoginComp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(email);
+
 const response = await axios.post(backendUrl+'/api/auth/login', {"email": email,"password": password});
 console.log(email);
 console.log(response.data.token);
@@ -102,5 +103,4 @@ const handleForgetPassword = async (e) => {
     </Grid>
   );
 }
-
 export default LoginComp;

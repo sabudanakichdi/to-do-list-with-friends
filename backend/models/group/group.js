@@ -21,7 +21,11 @@ const Group = mongoose.model("Group", {
   createdBy: {
     type: String,
     trim: true
-  }
+  },
+  users: {
+    type: Array,
+    trim: true,
+  },
 });
 
 module.exports = { Group };
