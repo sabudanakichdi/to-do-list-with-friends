@@ -153,12 +153,9 @@ export default function TaskCards() {
           .get(backendUrl + `/api/dashboard/${groupName}/stats`)
           .then((response) => {
             const stats = response.data;
-            console.log("response.data", response.data);
             console.log("Options_ID", groupName);
             console.log("Stats ===>", stats);
             setGroupStats(stats);
-            const groupDetails = Object.entries(stats).map(([key, value]) => ({ name: key, value: value}));
-            console.log("Group Stats", groupStats);
           })
           .catch((error) => {
             console.error("Error fetching stats:", error);
