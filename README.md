@@ -1,4 +1,5 @@
 [![Build Status](https://dev.azure.com/wedolistapp/We%20Do%20List/_apis/build/status%2Fsabudanakichdi.to-do-list-with-friends?branchName=main)](https://dev.azure.com/wedolistapp/We%20Do%20List/_build/latest?definitionId=1&branchName=main)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/7da768f47707407db8853ba47fe64247)](https://app.codacy.com/gh/sabudanakichdi/to-do-list-with-friends/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 ## We Do List
 
 ### Use with Docker Development Environments
