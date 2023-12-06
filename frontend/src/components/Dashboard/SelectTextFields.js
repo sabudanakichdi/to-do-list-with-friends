@@ -2,39 +2,61 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import config from "../../config.json";
+import Cookies from "js-cookie";
 
 const backendUrl = config.backendUrl;
 
 export default function SelectTextFields({ onGroupChange }) {
-  const [group, setGroup] = React.useState("");
-  const [options, setOptions] = React.useState([]);
+  const [group, setGroup] = useState("");
+  const [options, setOptions] = useState([]);
+  const [userId, setUserId] = useState(""); // [selectedGroup, setSelectedGroup
 
   useEffect(() => {
-    axios
-      .get(backendUrl + `/api/group/`)
-      .then((response) => {
-        const groupsMap = response.data.data;
-        console.log("Groups Map ===>", groupsMap);
-
-        const optionsArray = Object.entries(groupsMap).map(([key, value]) => ({
-          _id: key,
-          name: value,
-        }));
-
-        if (optionsArray.length > 0) {
-          setOptions(optionsArray);
-          console.log("optionsArray[0].name", optionsArray[0].name);
-        } else {
-          console.error("No data received from the API.");
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching groups:", error);
+    async function fetchUser() {
+      var token = Cookies.get("authToken");
+      var user = JSON.parse(Cookies.get("userDetails"));
+      const response = await axios.post(backendUrl + "/api/auth/isauth", {
+        token: token,
+        email: user.email,
       });
-  }, []);
+      console.log("Dashboard response", response.data.userid);
+
+      setUserId(response.data.userid);
+    }
+    async function fetchGroups() {
+      await axios
+        .get(backendUrl + `/api/group/user/${userId}`)
+        .then((response) => {
+          const groupsMap = response.data.data;
+          console.log("Groups Map ===>", groupsMap);
+          
+          const optionsArray = Object.entries(groupsMap).map(
+            ([key, value]) => ({
+              _id: key,
+              name: value,
+            })
+          );
+          
+          if (optionsArray.length > 0) {
+            console.log("Options Array", optionsArray);
+            const selectedAttributes = optionsArray.map(obj => obj.name);
+            setOptions(optionsArray);
+            console.log("Options", options);
+          } else {
+            console.error("No data received from the API.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching groups:", error);
+        });
+    }
+
+    fetchUser();
+    fetchGroups();
+  }, [userId]);
 
   const handleChange = (event) => {
     setGroup(event.target.value);

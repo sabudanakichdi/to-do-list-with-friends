@@ -1,7 +1,7 @@
 const express = require('express');;
 const dashboardRouter = express.Router();
 const dashboardService = require('../../services/dashboardService');
-const taskService = require('../../services/taskService');
+const groupService = require('../../services/groupService');
 
 dashboardRouter.get('/inprogress', (req, res) => {
 
@@ -41,6 +41,14 @@ dashboardRouter.get('/:groupID/stats', (req, res) => {
         }).catch((e) => {
             res.status(400).json(e);
         });
+});
+
+dashboardRouter.get('/:userID/group', (req, res) => {
+    groupService.getGroupsByUser(req.params.userID).then((result) => {
+        res.status(200).json(result);
+    }).catch((e) => {
+        res.status(400).json(e);
+    });
 });
 
 

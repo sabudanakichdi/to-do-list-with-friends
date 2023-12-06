@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { Box, Card, CardContent, Typography, Grid, Pagination, Tabs, Tab, TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
 import Stack from '@mui/material/Stack';
@@ -6,6 +6,11 @@ import Chip from '@mui/material/Chip';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import axios from 'axios';
+import config from '../../config.json';
+import Cookies from 'js-cookie';
+
+const backendUrl = config.backendUrl;
 
 
 const priorityChipStyles = {
@@ -74,31 +79,78 @@ const ITEMS_PER_PAGE = 4;
 export default function TaskCards() {
   const [value, setValue] = useState('groups');
   const [page, setPage] = useState(1);
-
+  const [userId, setUserId] = useState("");
+  const [options, setOptions] = useState([]);
+  
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+  
   const handlePaginationChange = (event, value) => {
     setPage(value);
   };
-
+  
   const getPriorityChip = (priority) => {
     return (
       <Chip
-        label={priority}
-        size="small"
-        sx={{ ...priorityChipStyles[priority], borderRadius: '4px' }}
+      label={priority}
+      size="small"
+      sx={{ ...priorityChipStyles[priority], borderRadius: '4px' }}
       />
-    );
-  };
-  // Calculate the current items for the active page
-  const indexOfLastItem = page * ITEMS_PER_PAGE;
-  const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
-  const currentItems = tasks.groups.slice(indexOfFirstItem, indexOfLastItem);
+      );
+    };
+    // Calculate the current items for the active page
+    const indexOfLastItem = page * ITEMS_PER_PAGE;
+    const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
+    const currentItems = tasks.groups.slice(indexOfFirstItem, indexOfLastItem);
+    
+    useEffect(() => {
+      async function fetchUser() {
+        var token = Cookies.get("authToken");
+        var user = JSON.parse(Cookies.get("userDetails"));
+        const response = await axios.post(backendUrl + "/api/auth/isauth", {
+          token: token,
+          email: user.email,
+        });
+        console.log("Dashboard response", response.data.userid);
+  
+        setUserId(response.data.userid);
+      }
+      async function fetchGroups() {
+        await axios
+          .get(backendUrl + `/api/group/user/${userId}`)
+          .then((response) => {
+            const groupsMap = response.data.data;
+            console.log("Groups Map ===>", groupsMap);
+            
+            const optionsArray = Object.entries(groupsMap).map(
+              ([key, value]) => ({
+                _id: key,
+                name: value,
+              })
+            );
+            
+            if (optionsArray.length > 0) {
+              console.log("Options Array", optionsArray);
+              setOptions(optionsArray);
+              console.log("Options", options);
+            } else {
+              console.error("No data received from the API.");
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching groups:", error);
+          });
+      }
+  
+      fetchUser();
+      fetchGroups();
 
-  return (
-    <Box sx={{ width: '100%' }}>
+    } , [userId]) ;
+
+
+    return (
+      <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs 
           value={value} 

@@ -71,4 +71,16 @@ groupRouter.delete("/:id", async (req, res) => {
   }
 });
 
+groupRouter.get("/user/:id", async (req, res) => {
+  await groupService
+    .getGroupsByUser(req.params.id)
+    .then((result) => {
+      serviceResponses.sendSuccess(res, messages.SUCCESSFUL, result);
+    })
+    .catch((e) => {
+      serviceResponses.sendError(res, messages.BAD_REQUEST, e);
+    });
+});
+
+
 module.exports = groupRouter;

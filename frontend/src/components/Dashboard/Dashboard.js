@@ -1,22 +1,27 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import './Dashboard.css';
 import PieChartComponent from './PieChartComponent';
 import SelectTextFields from './SelectTextFields';
 import TaskCards from './TaskCards';
-import Search from './Search'; 
-import Tags from './Tags';  
 import AddTaskButton from './AddTaskButton'; 
 import {getLoggedinUser} from '../../context/AuthContext';
+
+
+
+
 
 function Dashboard() {
   let loggedinuser = getLoggedinUser();
   console.log("loggedinuser",loggedinuser);
 
-  const [selectedGroup, setSelectedGroup] = useState(''); // [selectedGroup, setSelectedGroup
+
+  const [selectedGroup, setSelectedGroup] = useState('');
+
   const handleGroupChange = (group) => {
     console.log("Selected group Dashboard", group);
     setSelectedGroup(group);
   };
+
 
   return (
     <div className="dashboard">

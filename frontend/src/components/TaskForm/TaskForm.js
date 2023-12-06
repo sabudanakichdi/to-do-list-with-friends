@@ -147,7 +147,7 @@ function TaskForm() {
       <div className="header">
         Task Management
         <span className="header-icons">
-          <Link to="/" style={ {color:"inherit", textDecoration:"none"}}>
+          <Link to="/dashboard" style={ {color:"inherit", textDecoration:"none"}}>
             <span>←</span>
             <span>×</span>
           </Link>

@@ -6,5 +6,9 @@
   "development":{
     "PORT": 3000,
     "MONGODB_URI": "mongodb://mongo:27017/TodoApp"
+  },
+  "local":{
+    "PORT": 8000,
+    "MONGODB_URI": "mongodb://localhost:27017/WeDo"
   }
 }

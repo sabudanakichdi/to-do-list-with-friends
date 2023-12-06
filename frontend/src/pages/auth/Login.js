@@ -7,13 +7,20 @@ import Cookies from 'js-cookie';
 
 function Login() {  
   const checklogin = async () => {
-    const token = Cookies.get('authToken');
-    const userDetails = JSON.parse(Cookies.get('userDetails'));
-
-    if (token!==null && userDetails!==null && await AuthVerify()) {
-      // window.location.href = '/register';
-      window.location.href = '/dashboard';
-    }   
+    if(Cookies.get('userDetails')!==undefined || Cookies.get('authToken')!==undefined){
+      const token = Cookies.get('authToken');
+      const userDetails = JSON.parse(Cookies.get('userDetails'));
+      console.log("token", token);
+      if (token!==null && userDetails!==null && await AuthVerify()) {
+        // window.location.href = '/register';
+        window.location.href = '/dashboard';
+        
+      }     
+    }else{
+      console.log("No user logged in")
+      window.location.href = '/';
+    }
+    
     // console.log(this.state.user);
   };
   checklogin();
