@@ -12,7 +12,7 @@ const backendUrl = config.backendUrl;
 export default function SelectTextFields({ onGroupChange }) {
   const [group, setGroup] = useState("");
   const [options, setOptions] = useState([]);
-  const [userId, setUserId] = useState(""); // [selectedGroup, setSelectedGroup
+  const [userId, setUserId] = useState(""); 
 
   useEffect(() => {
     async function fetchUser() {
@@ -32,8 +32,8 @@ export default function SelectTextFields({ onGroupChange }) {
         .then((response) => {
           const groupsMap = response.data.data;
           console.log("Groups Map ===>", groupsMap);
-          
-          const optionsArray = Object.entries(groupsMap).map(
+          const groupNames = groupsMap.map((group) => group.name);
+          const optionsArray = Object.entries(groupNames).map(
             ([key, value]) => ({
               _id: key,
               name: value,
@@ -42,9 +42,9 @@ export default function SelectTextFields({ onGroupChange }) {
           
           if (optionsArray.length > 0) {
             console.log("Options Array", optionsArray);
-            const selectedAttributes = optionsArray.map(obj => obj.name);
+            //const selectedAttributes = optionsArray.map(obj => obj.name.name);
             setOptions(optionsArray);
-            console.log("Options", options);
+            //console.log("Options Selected Fields", selectedAttributes);
           } else {
             console.error("No data received from the API.");
           }

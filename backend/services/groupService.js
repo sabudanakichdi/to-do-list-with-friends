@@ -59,7 +59,7 @@ const groupService = {
         const groupsMap=  userGroups.map((group) => group.toObject());
         const groupNames = groupsMap.map((group) => group.name);
 
-        return groupNames;
+        return groupsMap;
       }
 };
 

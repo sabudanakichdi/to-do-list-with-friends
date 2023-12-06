@@ -17,6 +17,7 @@ function Login() {
         
       }     
     }else{
+      await
       console.log("No user logged in")
       window.location.href = '/';
     }

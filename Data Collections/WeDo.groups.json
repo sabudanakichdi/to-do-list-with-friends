@@ -1,0 +1,187 @@
+[{
+  "_id": {
+    "$oid": "654972b2a208a966e86ef8de"
+  },
+  "name": "test name",
+  "totalTask": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654aac045d11d17473c25d02"
+  },
+  "name": "home",
+  "totalTask": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654aac145d11d17473c25d04"
+  },
+  "name": "work",
+  "totalTask": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654aac1c5d11d17473c25d06"
+  },
+  "name": "personal",
+  "totalTask": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654ab5de5d11d17473c25d1b"
+  },
+  "name": "Test Group Name",
+  "totalTask": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654ab7d15d11d17473c25d1f"
+  },
+  "name": "add group test",
+  "totalTask": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654ab8045d11d17473c25d22"
+  },
+  "name": "add group test2",
+  "totalTask": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654ab8b411b2288dc0b1ef17"
+  },
+  "name": "test3",
+  "totalTask": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654ab8e611b2288dc0b1ef19"
+  },
+  "name": "test4",
+  "totalTask": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654ab91511b2288dc0b1ef1b"
+  },
+  "name": "add group test 3",
+  "totalTask": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654ab95611b2288dc0b1ef1e"
+  },
+  "name": "add group test 4",
+  "totalTask": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654ab9ac11b2288dc0b1ef21"
+  },
+  "name": "add group test 5",
+  "totalTask": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654abb36e30a721d29548663"
+  },
+  "name": "add group test 7",
+  "totalTask": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654abb50e30a721d29548665"
+  },
+  "name": "test5",
+  "totalTask": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654abbbbdc46fc29c6f809a0"
+  },
+  "name": "Test 6",
+  "totalTask": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654abbefdc46fc29c6f809a4"
+  },
+  "name": "Test 7",
+  "totalTask": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654abc15dc46fc29c6f809a8"
+  },
+  "name": "Test 8",
+  "totalTask": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654af6c98046c02ad629761d"
+  },
+  "name": "test",
+  "totalTask": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "654c2aa31eb6c1f49ec0031e"
+  },
+  "name": "Test2",
+  "totalTask": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656fb7546ad40ab307aeffdd"
+  },
+  "name": "demo",
+  "totalTask": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656fbd4db60e5e3b17ff6163"
+  },
+  "name": "Presentation",
+  "totalTask": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656fbd73b60e5e3b17ff6165"
+  },
+  "name": "Final Presentation",
+  "totalTask": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656fbdddc04cf5922d0534c7"
+  },
+  "name": "Final Presentation",
+  "totalTask": [],
+  "users": [
+    "656fb85056c7349f0443f4e4"
+  ],
+  "__v": 0
+}]
