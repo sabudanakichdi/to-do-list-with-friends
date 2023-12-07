@@ -71,5 +71,5 @@ stages:
         containerAppName: 'wedolist-backend'
         resourceGroup: 'wedolist'
         containerAppEnvironment: 'managedEnvironment-wedolist-88c7'
-        targetPort: '3000'
+        targetPort: '8000'
         location: 'West US 2'
